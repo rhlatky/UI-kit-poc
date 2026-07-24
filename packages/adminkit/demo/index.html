@@ -2,29 +2,28 @@
 <html lang="sk" data-theme="light">
 <head>
   <meta charset="utf-8" />
-  <title>adminkit — CSS + vanilla JS (no framework)</title>
-  <link rel="stylesheet" href="../src/scss/tokens.css" />
-  <link rel="stylesheet" href="../dist/button.css" />
-  <link rel="stylesheet" href="../dist/input.css" />
-  <link rel="stylesheet" href="../dist/card.css" />
+  <title>adminkit — plain CSS + vanilla JS (no framework, no sass)</title>
+  <link rel="stylesheet" href="../src/css/tokens.css" />
+  <link rel="stylesheet" href="../src/css/button.css" />
+  <link rel="stylesheet" href="../src/css/input.css" />
+  <link rel="stylesheet" href="../src/css/card.css" />
   <style>body{margin:2rem;font-family:var(--ds-font-sans);display:flex;flex-direction:column;gap:1.25rem;align-items:flex-start}.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:flex-start}h3{margin:.25rem 0;font-size:12px;color:#666;text-transform:uppercase}</style>
 </head>
 <body>
-  <h3>Static HTML (what Twig renders — plain BEM)</h3>
+  <h3>Static HTML (Twig-style, plain BEM)</h3>
   <div class="row">
     <button class="button button--primary button--md">Primary</button>
-    <button class="button button--secondary button--md">Secondary</button>
     <button class="button button--ghost button--md">Ghost</button>
-    <div class="field" style="width:200px"><label class="field__label">Email</label><input class="field__input field__input--invalid" placeholder="x@y.sk" /><p class="field__msg field__msg--invalid">Invalid</p></div>
+    <div class="field" style="width:200px"><label class="field__label">Email</label><input class="field__input field__input--invalid" /><p class="field__msg field__msg--invalid">Invalid</p></div>
     <div class="card card--elevated" style="width:200px"><div class="card__header">Card</div><div class="card__body">Body</div></div>
   </div>
-  <h3>Vanilla JS (adminkit/dom) — no framework</h3>
+  <h3>Vanilla JS (adminkit/dom)</h3>
   <div class="row" id="js"></div>
   <script type="module">
     import { createButton, createInput, createCard } from '../src/dom/index.js'
     document.getElementById('js').append(
-      createButton({ variant: 'primary', size: 'lg', label: 'JS Button' }),
-      createInput({ label: 'JS Input', placeholder: '…', hint: 'ok' }),
+      createButton({ variant: 'secondary', size: 'lg', label: 'JS Button' }),
+      createInput({ label: 'JS Input', hint: 'ok' }),
       createCard({ variant: 'flat', header: 'JS Card', body: 'vanilla', footer: 'meta' }),
     )
   </script>

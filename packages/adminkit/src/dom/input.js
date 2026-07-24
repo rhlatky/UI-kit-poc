@@ -1,9 +1,10 @@
 import { defineParts } from '../variants.js'
+import { input as c } from '../classes/input.js'
 export const field = defineParts({
-  parts: { root: 'field', label: 'field__label', input: 'field__input', msg: 'field__msg' },
+  parts: { root: c.field, label: c.fieldLabel, input: c.fieldInput, msg: c.fieldMsg },
   variants: {
-    invalid: { true: { input: 'field__input--invalid', msg: 'field__msg--invalid' }, false: {} },
-    disabled: { true: { root: 'field--disabled' }, false: {} },
+    invalid: { true: { input: c.fieldInputInvalid, msg: c.fieldMsgInvalid }, false: {} },
+    disabled: { true: { root: c.fieldDisabled }, false: {} },
   },
   defaultVariants: { invalid: false, disabled: false },
 })

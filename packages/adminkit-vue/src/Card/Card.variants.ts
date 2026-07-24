@@ -1,9 +1,9 @@
 import { defineParts } from 'adminkit/variants'
-import styles from './Card.module.scss'
+import { card as c } from 'adminkit/classes/card'
 
 export const card = defineParts({
-  parts: { root: styles.card, header: styles.cardHeader, body: styles.cardBody, footer: styles.cardFooter },
-  variants: { variant: { elevated: { root: styles.cardElevated }, flat: { root: styles.cardFlat } } },
+  parts: { root: c.card, header: c.cardHeader, body: c.cardBody, footer: c.cardFooter },
+  variants: { variant: { elevated: { root: c.cardElevated }, flat: { root: c.cardFlat } } },
   defaultVariants: { variant: 'elevated' },
 })
 

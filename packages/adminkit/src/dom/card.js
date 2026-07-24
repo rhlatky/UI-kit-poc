@@ -1,7 +1,8 @@
 import { defineParts } from '../variants.js'
+import { card as c } from '../classes/card.js'
 export const card = defineParts({
-  parts: { root: 'card', header: 'card__header', body: 'card__body', footer: 'card__footer' },
-  variants: { variant: { elevated: { root: 'card--elevated' }, flat: { root: 'card--flat' } } },
+  parts: { root: c.card, header: c.cardHeader, body: c.cardBody, footer: c.cardFooter },
+  variants: { variant: { elevated: { root: c.cardElevated }, flat: { root: c.cardFlat } } },
   defaultVariants: { variant: 'elevated' },
 })
 export function createCard({ variant = 'elevated', header, body = '', footer } = {}) {

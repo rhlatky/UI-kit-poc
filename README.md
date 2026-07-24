@@ -1,32 +1,36 @@
 # adminkit — monorepo (PoC)
 
-Two packages. Styling + base interactivity co-versioned together; Vue on top.
+Two packages. **Plain CSS** (no Sass, no CSS-Modules), one shared class contract
+across Vue + vanilla + Twig, level-2 typed via a generated `as const` manifest.
 
 ## Packages
-- **adminkit** — CSS (BEM SCSS source of truth + tokens) **+ vanilla JS** for small
-  critical interactive elements **+ the shared variant CORE** (`defineVariants` /
-  `defineParts`). Framework-agnostic. Ships plain per-component `.css` too.
-  Subpath exports keep concerns separate:
-  - `adminkit/button.scss` … — SCSS source (Vue `@use`s these, for L2 typing)
-  - `adminkit/variants`      — the props→class algorithm (used by vanilla AND Vue)
-  - `adminkit/dom`           — vanilla DOM factories (`createButton`, …)
-  - `adminkit/css/button.css`… — compiled CSS (plain HTML / Twig)
-  - `adminkit/tokens.css`
-- **@adminkit/vue** — large interactive Vue components (approach H: CSS Modules + BEM).
-  Each `.module.scss` `@use`s the adminkit SCSS; `typed-scss-modules` → `.d.ts` →
-  **level-2** typed class access. Variant logic imported from `adminkit/variants`
-  (no copy) and wrapped in a Vue `computed`.
+- **adminkit** — the base:
+  - `src/css/*.css` — plain BEM CSS (source of truth) + `tokens.css`. Global,
+    stable class names (`button--primary`) — the SAME strings every runtime uses.
+  - `src/classes/*.{js,d.ts}` — **generated** typed class manifest (`as const`),
+    produced from the CSS by `scripts/gen-classes.mjs` (our ~30-line script — no
+    external, unmaintained dep). This is the type source for level-2.
+  - `src/variants.{js,d.ts}` — shared variant CORE (`defineVariants`/`defineParts`).
+  - `src/dom/*.js` — vanilla DOM factories (`createButton`, …) for the Twig/CMS side.
+  - Subpath exports: `adminkit/button.css`, `adminkit/classes/button`, `adminkit/variants`, `adminkit/dom`.
+- **@adminkit/vue** — Vue components. Import the class manifest from
+  `adminkit/classes/*` + the variant core from `adminkit/variants`; a typo'd class
+  is a compile error (level-2). Each component imports its `adminkit/*.css` for styling.
 
-Why two, not three: the vanilla JS hardcodes the BEM class contract from the CSS,
-so they must move together — one package = no version skew. The variant algorithm
-lives once in `adminkit/variants`; both runtimes consume it.
+No Sass. No CSS-Modules (so no scoping → Vue, vanilla and Twig share the exact
+same class names). Type generation is our own script over the plain CSS.
 
 ## Verify
     pnpm install          # then `pnpm approve-builds` once (esbuild) — pnpm 11 quirk
-    ./verify.sh           # build css → gen types from adminkit scss → vue-tsc L2
+    ./verify.sh           # regenerate manifest from css → vue-tsc level-2
 
 Typo proof: mistype a class in `packages/adminkit-vue/src/Button/Button.variants.ts`
-(`styles.buttonPrimaryy`) → vue-tsc fails. The css package still gives Vue L2.
+(`c.buttonPrimaryy`) → vue-tsc fails against the generated manifest.
 
-## Demo (vanilla, no Vue)
-    open packages/adminkit/demo/index.html    # after ./verify.sh built the css
+## Demo (vanilla, no Vue, no build)
+    open packages/adminkit/demo/index.html
+
+## Why plain CSS + manifest (vs the earlier scss/css-modules PoC)
+- One class contract everywhere (no `.module.scss` scoping that diverged Vue↔Twig).
+- No Sass toolchain, no unmaintained `typed-css-modules`; L2 comes from a generated
+  `as const` manifest we own. Regenerate on css change (CI step / pre-commit).

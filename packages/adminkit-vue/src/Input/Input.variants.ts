@@ -1,11 +1,11 @@
 import { defineParts } from 'adminkit/variants'
-import styles from './Input.module.scss'
+import { input as c } from 'adminkit/classes/input'
 
 export const field = defineParts({
-  parts: { root: styles.field, label: styles.fieldLabel, input: styles.fieldInput, msg: styles.fieldMsg },
+  parts: { root: c.field, label: c.fieldLabel, input: c.fieldInput, msg: c.fieldMsg },
   variants: {
-    invalid: { true: { input: styles.fieldInputInvalid, msg: styles.fieldMsgInvalid }, false: {} },
-    disabled: { true: { root: styles.fieldDisabled }, false: {} },
+    invalid: { true: { input: c.fieldInputInvalid, msg: c.fieldMsgInvalid }, false: {} },
+    disabled: { true: { root: c.fieldDisabled }, false: {} },
   },
   defaultVariants: { invalid: false, disabled: false },
 })

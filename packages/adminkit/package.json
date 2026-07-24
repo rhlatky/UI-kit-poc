@@ -2,21 +2,18 @@
   "name": "adminkit",
   "version": "0.0.0",
   "type": "module",
-  "description": "CSS (BEM SCSS source of truth) + vanilla JS for small critical interactive elements. Framework-agnostic.",
+  "description": "Plain CSS (BEM, source of truth) + generated typed class manifest + vanilla JS + shared variant core. No sass, no css-modules.",
   "exports": {
-    "./tokens.css": "./src/scss/tokens.css",
-    "./button.scss": "./src/scss/button.scss",
-    "./input.scss": "./src/scss/input.scss",
-    "./card.scss": "./src/scss/card.scss",
+    "./tokens.css": "./src/css/tokens.css",
+    "./button.css": "./src/css/button.css",
+    "./input.css": "./src/css/input.css",
+    "./card.css": "./src/css/card.css",
     "./variants": { "types": "./src/variants.d.ts", "default": "./src/variants.js" },
-    "./dom": "./src/dom/index.js",
-    "./css/button.css": "./dist/button.css",
-    "./css/input.css": "./dist/input.css",
-    "./css/card.css": "./dist/card.css"
+    "./classes/button": { "types": "./src/classes/button.d.ts", "default": "./src/classes/button.js" },
+    "./classes/input": { "types": "./src/classes/input.d.ts", "default": "./src/classes/input.js" },
+    "./classes/card": { "types": "./src/classes/card.d.ts", "default": "./src/classes/card.js" },
+    "./dom": "./src/dom/index.js"
   },
-  "files": ["src", "dist"],
-  "scripts": {
-    "build": "sass src/scss/button.scss:dist/button.css src/scss/input.scss:dist/input.css src/scss/card.scss:dist/card.css --style=compressed --no-source-map"
-  },
-  "devDependencies": { "sass": "^1.80.0" }
+  "files": ["src"],
+  "scripts": { "gen": "node scripts/gen-classes.mjs" }
 }

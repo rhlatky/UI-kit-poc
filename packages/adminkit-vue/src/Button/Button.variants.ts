@@ -1,14 +1,12 @@
 import { defineVariants } from 'adminkit/variants'
-import styles from './Button.module.scss'
+import { button as c } from 'adminkit/classes/button'
 
-const variant = { primary: styles.buttonPrimary, secondary: styles.buttonSecondary, ghost: styles.buttonGhost }
-const size = { sm: styles.buttonSm, md: styles.buttonMd, lg: styles.buttonLg }
+// Class names come from adminkit's generated `as const` manifest (single source,
+// same plain BEM strings as vanilla + Twig). `c.buttonPrimaryy` = compile error → L2.
+const variant = { primary: c.buttonPrimary, secondary: c.buttonSecondary, ghost: c.buttonGhost }
+const size = { sm: c.buttonSm, md: c.buttonMd, lg: c.buttonLg }
 
-// Shared CORE resolver from `adminkit` — one algorithm for vanilla + Vue.
-export const button = defineVariants(styles.button, {
-  variants: { variant, size },
-  defaultVariants: { size: 'md' },
-})
+export const button = defineVariants(c.button, { variants: { variant, size }, defaultVariants: { size: 'md' } })
 
 export type ButtonVariant = keyof typeof variant
 export type ButtonSize = keyof typeof size

@@ -1,8 +1,9 @@
 import { defineVariants } from '../variants.js'
-export const buttonClass = defineVariants('button', {
+import { button as c } from '../classes/button.js'
+export const buttonClass = defineVariants(c.button, {
   variants: {
-    variant: { primary: 'button--primary', secondary: 'button--secondary', ghost: 'button--ghost' },
-    size: { sm: 'button--sm', md: 'button--md', lg: 'button--lg' },
+    variant: { primary: c.buttonPrimary, secondary: c.buttonSecondary, ghost: c.buttonGhost },
+    size: { sm: c.buttonSm, md: c.buttonMd, lg: c.buttonLg },
   },
   defaultVariants: { size: 'md' },
 })

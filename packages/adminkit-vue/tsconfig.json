@@ -4,5 +4,5 @@
     "lib": ["ESNext", "DOM", "DOM.Iterable"], "strict": true, "noEmit": true,
     "skipLibCheck": true, "isolatedModules": true, "verbatimModuleSyntax": true
   },
-  "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.d.ts"]
+  "include": ["src/**/*.ts", "src/**/*.vue", "env.d.ts"]
 }
