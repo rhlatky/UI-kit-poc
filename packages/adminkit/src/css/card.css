@@ -1,6 +1,33 @@
-.card { overflow:hidden; font-family:var(--ds-font-sans); color:var(--ds-color-text); background:var(--ds-color-surface); border:1px solid var(--ds-color-border); border-radius:var(--ds-radius-md); }
-.card--elevated { box-shadow:0 2px 8px rgba(0,0,0,.12); }
-.card--flat { box-shadow:none; }
-.card__header { padding:var(--ds-space-3) var(--ds-space-4); font-weight:700; border-bottom:1px solid var(--ds-color-border); }
-.card__body { padding:var(--ds-space-4); }
-.card__footer { padding:var(--ds-space-3) var(--ds-space-4); font-size:var(--ds-text-sm); color:var(--ds-color-text); border-top:1px solid var(--ds-color-border); }
+/* Card — BEM in plain CSS. Block + modifiers nested via `&.`; elements top-level. */
+.card {
+  overflow: hidden;
+  font-family: var(--ds-font-sans);
+  color: var(--ds-color-text);
+  background: var(--ds-color-surface);
+  border: 1px solid var(--ds-color-border);
+  border-radius: var(--ds-radius-md);
+
+  &.card--elevated {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+  &.card--flat {
+    box-shadow: none;
+  }
+}
+
+.card__header {
+  padding: var(--ds-space-3) var(--ds-space-4);
+  font-weight: 700;
+  border-bottom: 1px solid var(--ds-color-border);
+}
+
+.card__body {
+  padding: var(--ds-space-4);
+}
+
+.card__footer {
+  padding: var(--ds-space-3) var(--ds-space-4);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-color-text);
+  border-top: 1px solid var(--ds-color-border);
+}

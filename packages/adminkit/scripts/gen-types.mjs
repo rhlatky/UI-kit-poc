@@ -12,7 +12,7 @@ const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1).replace(/-([a-z])/g, (
 
 for (const file of readdirSync(cssDir).filter((f) => f.endsWith('.css') && f !== 'tokens.css')) {
   const name = file.replace(/\.css$/, '')
-  const css = readFileSync(join(cssDir, file), 'utf8')
+  const css = readFileSync(join(cssDir, file), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '') // strip comments
   const classes = [...new Set([...css.matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)].map((m) => m[1]))]
   const union = classes.map((c) => `  | ${JSON.stringify(c)}`).join('\n')
   writeFileSync(join(outDir, `${name}.d.ts`), `export type ${cap(name)}Class =\n${union}\n`)
