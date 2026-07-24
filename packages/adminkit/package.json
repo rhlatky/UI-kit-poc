@@ -16,6 +16,7 @@
     "src"
   ],
   "scripts": {
-    "gen": "node scripts/gen-classes.mjs"
+    "gen:classes": "node scripts/gen-classes.mjs",
+    "gen:classes:watch": "node scripts/gen-classes.mjs --watch"
   }
 }

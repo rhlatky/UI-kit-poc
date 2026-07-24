@@ -3,7 +3,17 @@
   "private": true,
   "version": "0.0.0",
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "@parcel/watcher"],
-    "ignoredBuiltDependencies": ["esbuild", "@parcel/watcher"]
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "@parcel/watcher"
+    ],
+    "ignoredBuiltDependencies": [
+      "esbuild",
+      "@parcel/watcher"
+    ]
+  },
+  "scripts": {
+    "gen:classes": "node packages/adminkit/scripts/gen-classes.mjs",
+    "gen:classes:watch": "node packages/adminkit/scripts/gen-classes.mjs --watch"
   }
 }
