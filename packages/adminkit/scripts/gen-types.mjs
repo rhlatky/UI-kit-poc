@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const cssDir = join(root, 'src/css')
-const outDir = join(root, 'src/classes')
+const outDir = join(root, 'src/types')
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1).replace(/-([a-z])/g, (_, c) => c.toUpperCase())
 
 for (const file of readdirSync(cssDir).filter((f) => f.endsWith('.css') && f !== 'tokens.css')) {
@@ -16,5 +16,5 @@ for (const file of readdirSync(cssDir).filter((f) => f.endsWith('.css') && f !==
   const classes = [...new Set([...css.matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)].map((m) => m[1]))]
   const union = classes.map((c) => `  | ${JSON.stringify(c)}`).join('\n')
   writeFileSync(join(outDir, `${name}.d.ts`), `export type ${cap(name)}Class =\n${union}\n`)
-  console.log(`[classes] ${name}: ${classes.length} classes → ${cap(name)}Class`)
+  console.log(`[types] ${name}: ${classes.length} classes → ${cap(name)}Class`)
 }

@@ -1,5 +1,5 @@
 import { defineParts } from 'adminkit/variants'
-import type { CardClass } from 'adminkit/classes/card'
+import type { CardClass } from 'adminkit/types/card'
 
 const cls = {
   root: 'card', elevated: 'card--elevated', flat: 'card--flat',

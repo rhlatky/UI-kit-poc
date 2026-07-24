@@ -12,21 +12,21 @@
       "types": "./src/variants.d.ts",
       "default": "./src/variants.js"
     },
-    "./classes/button": {
-      "types": "./src/classes/button.d.ts"
+    "./dom": "./src/dom/index.js",
+    "./types/button": {
+      "types": "./src/types/button.d.ts"
     },
-    "./classes/input": {
-      "types": "./src/classes/input.d.ts"
+    "./types/input": {
+      "types": "./src/types/input.d.ts"
     },
-    "./classes/card": {
-      "types": "./src/classes/card.d.ts"
-    },
-    "./dom": "./src/dom/index.js"
+    "./types/card": {
+      "types": "./src/types/card.d.ts"
+    }
   },
   "files": [
     "src"
   ],
   "scripts": {
-    "gen": "node scripts/gen-classes.mjs"
+    "gen": "node scripts/gen-types.mjs"
   }
 }

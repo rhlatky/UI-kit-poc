@@ -1,5 +1,5 @@
 import { defineVariants } from 'adminkit/variants'
-import type { ButtonClass } from 'adminkit/classes/button'
+import type { ButtonClass } from 'adminkit/types/button'
 
 // Class literals, checked against the generated ButtonClass union (single source
 // = css). Typo in a value → compile error; `cls.xy` typo → compile error. L2, no

@@ -1,5 +1,5 @@
 import { defineParts } from 'adminkit/variants'
-import type { InputClass } from 'adminkit/classes/input'
+import type { InputClass } from 'adminkit/types/input'
 
 const cls = {
   field: 'field', label: 'field__label', input: 'field__input', msg: 'field__msg',
