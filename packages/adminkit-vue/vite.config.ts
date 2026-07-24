@@ -2,12 +2,12 @@ import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-const cssSrc = fileURLToPath(new URL('../ui-kit-css/src', import.meta.url))
+const scssSrc = fileURLToPath(new URL('../adminkit/src/scss', import.meta.url))
 
 export default defineConfig({
   plugins: [vue()],
   css: {
     modules: { localsConvention: 'camelCaseOnly' },
-    preprocessorOptions: { scss: { loadPaths: [cssSrc] } },
+    preprocessorOptions: { scss: { loadPaths: [scssSrc] } },
   },
 })

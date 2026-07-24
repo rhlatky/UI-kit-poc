@@ -1,20 +1,9 @@
 {
-  "name": "ui-kit-poc",
+  "name": "adminkit-monorepo",
   "private": true,
   "version": "0.0.0",
-  "scripts": {
-    "build:css": "pnpm -C packages/ui-kit-css build",
-    "gen:types": "pnpm -C packages/ui-kit-vue gen:types",
-    "typecheck": "pnpm -C packages/ui-kit-vue typecheck"
-  },
   "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "@parcel/watcher"
-    ],
-    "ignoredBuiltDependencies": [
-      "esbuild",
-      "@parcel/watcher"
-    ]
+    "onlyBuiltDependencies": ["esbuild", "@parcel/watcher"],
+    "ignoredBuiltDependencies": ["esbuild", "@parcel/watcher"]
   }
 }

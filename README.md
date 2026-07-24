@@ -1,46 +1,32 @@
-# ui-kit-poc — monorepo skeleton (PoC)
+# adminkit — monorepo (PoC)
 
-One source of truth for styling, three consumers. Proves: **Vue keeps level-2
-typed CSS-module classes even when the styles live in a separate package**, and
-the **same styles drive plain HTML (Twig)**.
+Two packages. Styling + base interactivity co-versioned together; Vue on top.
 
 ## Packages
-- **@ui-kit/css** — SCSS source of truth: BEM classes (`button--primary`) + tokens.
-  Builds a plain `dist/button.css` any consumer can use.
-- **@ui-kit/vue** — Vue components, approach **H** (CSS Modules + BEM). Each
-  component's `.module.scss` `@use`s the ui-kit-css partial; `typed-scss-modules`
-  generates a `.d.ts` from it → `styles.*` is **level-2** typed (a typo is a
-  compile error). Ships its own module-scoped CSS.
-- **@ui-kit/twig** — **vanilla HTML + JS** implementations for the Twig/CMS side
-  (no framework). Plain BEM markup + a tiny vanilla `defineVariants` (the same
-  algorithm as the Vue helper) + a DOM factory (`createButton`). Styled by
-  `@ui-kit/css/dist/button.css`. Twig renders the static HTML; this JS enhances /
-  builds dynamically.
+- **adminkit** — CSS (BEM SCSS source of truth + tokens) **+ vanilla JS** for small
+  critical interactive elements **+ the shared variant CORE** (`defineVariants` /
+  `defineParts`). Framework-agnostic. Ships plain per-component `.css` too.
+  Subpath exports keep concerns separate:
+  - `adminkit/button.scss` … — SCSS source (Vue `@use`s these, for L2 typing)
+  - `adminkit/variants`      — the props→class algorithm (used by vanilla AND Vue)
+  - `adminkit/dom`           — vanilla DOM factories (`createButton`, …)
+  - `adminkit/css/button.css`… — compiled CSS (plain HTML / Twig)
+  - `adminkit/tokens.css`
+- **@adminkit/vue** — large interactive Vue components (approach H: CSS Modules + BEM).
+  Each `.module.scss` `@use`s the adminkit SCSS; `typed-scss-modules` → `.d.ts` →
+  **level-2** typed class access. Variant logic imported from `adminkit/variants`
+  (no copy) and wrapped in a Vue `computed`.
 
-Shared **source** (SCSS in ui-kit-css), per-package **output**. Variant→class
-logic is shared: the plain-JS `defineVariants` in @ui-kit/twig is the core the
-Vue package wraps — same algorithm, over the plain BEM class names.
+Why two, not three: the vanilla JS hardcodes the BEM class contract from the CSS,
+so they must move together — one package = no version skew. The variant algorithm
+lives once in `adminkit/variants`; both runtimes consume it.
 
 ## Verify
-    pnpm install          # then `pnpm approve-builds` once (pick esbuild) — pnpm 11 quirk
-    ./verify.sh           # runs the whole chain without pnpm's script runner
+    pnpm install          # then `pnpm approve-builds` once (esbuild) — pnpm 11 quirk
+    ./verify.sh           # build css → gen types from adminkit scss → vue-tsc L2
 
-verify.sh does:
-1. build @ui-kit/css → `packages/ui-kit-css/dist/button.css` (plain BEM, for Twig)
-2. generate `Button.module.scss.d.ts` in @ui-kit/vue from the `@use`'d css package
-3. `vue-tsc --noEmit` — a mistyped class name is a compile error (level-2)
+Typo proof: mistype a class in `packages/adminkit-vue/src/Button/Button.variants.ts`
+(`styles.buttonPrimaryy`) → vue-tsc fails. The css package still gives Vue L2.
 
-Try it: edit `packages/ui-kit-vue/src/Button/Button.variants.ts`, mistype a class
-(`styles.buttonPrimaryy`) → step 3 fails. That's the separate CSS package still
-giving Vue full type-safety.
-
-## See the Twig side (vanilla HTML + JS, no Vue)
-    open packages/ui-kit-twig/demo/index.html   # after ./verify.sh built the css
-
-Static buttons = what Twig renders server-side; the second row is built by the
-vanilla `createButton()` — identical classes, zero framework.
-
-## Key finding baked in
-- Separate SCSS package + L2 works via **`@use` + typed-scss-modules/sass-dts**
-  (JS-import path). Inline `<style module>` + strictCssModules does NOT resolve
-  `@use`'d classes — so the JS-import (H/G) path is the one for a css package.
+## Demo (vanilla, no Vue)
+    open packages/adminkit/demo/index.html    # after ./verify.sh built the css

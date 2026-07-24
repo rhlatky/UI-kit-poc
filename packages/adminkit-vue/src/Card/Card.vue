@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { card, type CardProps } from './Card.variants'
 
 const props = withDefaults(defineProps<CardProps>(), { variant: 'elevated' })
-const s = card(() => props)
+const s = computed(() => card(props))
 </script>
 
 <template>

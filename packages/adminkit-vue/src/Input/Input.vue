@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { field } from './Input.variants'
 
 const props = withDefaults(
@@ -7,7 +8,7 @@ const props = withDefaults(
 )
 defineEmits<{ 'update:modelValue': [value: string] }>()
 
-const s = field(() => ({ invalid: !!props.error, disabled: props.disabled }))
+const s = computed(() => field({ invalid: !!props.error, disabled: props.disabled }))
 </script>
 
 <template>

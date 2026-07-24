@@ -1,11 +1,9 @@
-import { defineParts } from './variants.js'
-
+import { defineParts } from '../variants.js'
 export const card = defineParts({
   parts: { root: 'card', header: 'card__header', body: 'card__body', footer: 'card__footer' },
   variants: { variant: { elevated: { root: 'card--elevated' }, flat: { root: 'card--flat' } } },
   defaultVariants: { variant: 'elevated' },
 })
-
 export function createCard({ variant = 'elevated', header, body = '', footer } = {}) {
   const s = card({ variant })
   const root = document.createElement('div'); root.className = s.root

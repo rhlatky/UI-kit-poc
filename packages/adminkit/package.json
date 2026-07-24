@@ -1,0 +1,22 @@
+{
+  "name": "adminkit",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "CSS (BEM SCSS source of truth) + vanilla JS for small critical interactive elements. Framework-agnostic.",
+  "exports": {
+    "./tokens.css": "./src/scss/tokens.css",
+    "./button.scss": "./src/scss/button.scss",
+    "./input.scss": "./src/scss/input.scss",
+    "./card.scss": "./src/scss/card.scss",
+    "./variants": { "types": "./src/variants.d.ts", "default": "./src/variants.js" },
+    "./dom": "./src/dom/index.js",
+    "./css/button.css": "./dist/button.css",
+    "./css/input.css": "./dist/input.css",
+    "./css/card.css": "./dist/card.css"
+  },
+  "files": ["src", "dist"],
+  "scripts": {
+    "build": "sass src/scss/button.scss:dist/button.css src/scss/input.scss:dist/input.css src/scss/card.scss:dist/card.css --style=compressed --no-source-map"
+  },
+  "devDependencies": { "sass": "^1.80.0" }
+}
