@@ -8,20 +8,14 @@
     "./button.css": "./src/css/button.css",
     "./input.css": "./src/css/input.css",
     "./card.css": "./src/css/card.css",
-    "./types/button": {
-      "types": "./src/types/button.d.ts"
-    },
-    "./types/input": {
-      "types": "./src/types/input.d.ts"
-    },
-    "./types/card": {
-      "types": "./src/types/card.d.ts"
-    }
+    "./generated-classes/button": "./src/generated-classes/button.ts",
+    "./generated-classes/input": "./src/generated-classes/input.ts",
+    "./generated-classes/card": "./src/generated-classes/card.ts"
   },
   "files": [
     "src"
   ],
   "scripts": {
-    "gen": "node scripts/gen-types.mjs"
+    "gen": "node scripts/gen-classes.mjs"
   }
 }
