@@ -1,4 +1,4 @@
-import { defineVariants } from 'adminkit/variants'
+import { defineVariants } from '../lib/defineVariants'
 import type { ButtonClass } from 'adminkit/types/button'
 
 // Class literals, checked against the generated ButtonClass union (single source

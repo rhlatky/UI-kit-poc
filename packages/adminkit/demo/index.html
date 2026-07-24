@@ -2,7 +2,7 @@
 <html lang="sk" data-theme="light">
 <head>
   <meta charset="utf-8" />
-  <title>adminkit — plain CSS + vanilla JS (no framework, no sass)</title>
+  <title>adminkit — plain CSS (BEM), no JS</title>
   <link rel="stylesheet" href="../src/css/tokens.css" />
   <link rel="stylesheet" href="../src/css/button.css" />
   <link rel="stylesheet" href="../src/css/input.css" />
@@ -10,22 +10,25 @@
   <style>body{margin:2rem;font-family:var(--ds-font-sans);display:flex;flex-direction:column;gap:1.25rem;align-items:flex-start}.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:flex-start}h3{margin:.25rem 0;font-size:12px;color:#666;text-transform:uppercase}</style>
 </head>
 <body>
-  <h3>Static HTML (Twig-style, plain BEM)</h3>
+  <!-- adminkit ships ONLY css + type unions. This is plain static HTML (what Twig
+       renders by convention: button--<variant>). No JS. -->
+  <h3>Button</h3>
   <div class="row">
     <button class="button button--primary button--md">Primary</button>
+    <button class="button button--secondary button--md">Secondary</button>
     <button class="button button--ghost button--md">Ghost</button>
-    <div class="field" style="width:200px"><label class="field__label">Email</label><input class="field__input field__input--invalid" /><p class="field__msg field__msg--invalid">Invalid</p></div>
-    <div class="card card--elevated" style="width:200px"><div class="card__header">Card</div><div class="card__body">Body</div></div>
+    <button class="button button--primary button--lg">Large</button>
+    <button class="button button--primary button--md" disabled>Disabled</button>
   </div>
-  <h3>Vanilla JS (adminkit/dom)</h3>
-  <div class="row" id="js"></div>
-  <script type="module">
-    import { createButton, createInput, createCard } from '../src/dom/index.js'
-    document.getElementById('js').append(
-      createButton({ variant: 'secondary', size: 'lg', label: 'JS Button' }),
-      createInput({ label: 'JS Input', hint: 'ok' }),
-      createCard({ variant: 'flat', header: 'JS Card', body: 'vanilla', footer: 'meta' }),
-    )
-  </script>
+  <h3>Input</h3>
+  <div class="row">
+    <div class="field" style="width:220px"><label class="field__label">Email</label><input class="field__input" placeholder="jane@x.sk" /><p class="field__msg">Your work email</p></div>
+    <div class="field" style="width:220px"><label class="field__label">Email</label><input class="field__input field__input--invalid" /><p class="field__msg field__msg--invalid">Invalid email</p></div>
+  </div>
+  <h3>Card</h3>
+  <div class="row">
+    <div class="card card--elevated" style="width:240px"><div class="card__header">Elevated</div><div class="card__body">Body content.</div><div class="card__footer">Footer</div></div>
+    <div class="card card--flat" style="width:240px"><div class="card__header">Flat</div><div class="card__body">Body content.</div><div class="card__footer">Footer</div></div>
+  </div>
 </body>
 </html>

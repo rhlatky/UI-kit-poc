@@ -2,17 +2,12 @@
   "name": "adminkit",
   "version": "0.0.0",
   "type": "module",
-  "description": "Plain CSS (BEM, source of truth) + generated typed class manifest + vanilla JS + shared variant core. No sass, no css-modules.",
+  "description": "Plain CSS (BEM, source of truth) + generated type-only class union. No JS logic, no sass, no css-modules.",
   "exports": {
     "./tokens.css": "./src/css/tokens.css",
     "./button.css": "./src/css/button.css",
     "./input.css": "./src/css/input.css",
     "./card.css": "./src/css/card.css",
-    "./variants": {
-      "types": "./src/variants.d.ts",
-      "default": "./src/variants.js"
-    },
-    "./dom": "./src/dom/index.js",
     "./types/button": {
       "types": "./src/types/button.d.ts"
     },

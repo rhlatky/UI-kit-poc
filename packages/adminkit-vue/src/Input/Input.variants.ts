@@ -1,4 +1,4 @@
-import { defineParts } from 'adminkit/variants'
+import { defineParts } from '../lib/defineVariants'
 import type { InputClass } from 'adminkit/types/input'
 
 const cls = {

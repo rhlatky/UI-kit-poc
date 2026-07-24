@@ -1,4 +1,4 @@
-import { defineParts } from 'adminkit/variants'
+import { defineParts } from '../lib/defineVariants'
 import type { CardClass } from 'adminkit/types/card'
 
 const cls = {
