@@ -1,16 +1,22 @@
 import { defineParts } from '../lib/defineVariants'
 import type { InputClass } from 'adminkit/types/input'
 
-const cls = {
-  field: 'field', label: 'field__label', input: 'field__input', msg: 'field__msg',
-  disabled: 'field--disabled', inputInvalid: 'field__input--invalid', msgInvalid: 'field__msg--invalid',
-} satisfies Record<string, InputClass>
-
 export const field = defineParts({
-  parts: { root: cls.field, label: cls.label, input: cls.input, msg: cls.msg },
+  parts: {
+    root: 'field',
+    label: 'field__label',
+    input: 'field__input',
+    msg: 'field__msg',
+  } satisfies Record<string, InputClass>,
   variants: {
-    invalid: { true: { input: cls.inputInvalid, msg: cls.msgInvalid }, false: {} },
-    disabled: { true: { root: cls.disabled }, false: {} },
+    invalid: {
+      true: { input: 'field__input--invalid', msg: 'field__msg--invalid' } satisfies Record<string, InputClass>,
+      false: {},
+    },
+    disabled: {
+      true: { root: 'field--disabled' } satisfies Record<string, InputClass>,
+      false: {},
+    },
   },
   defaultVariants: { invalid: false, disabled: false },
 })

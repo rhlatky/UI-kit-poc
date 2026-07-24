@@ -1,14 +1,19 @@
 import { defineParts } from '../lib/defineVariants'
 import type { CardClass } from 'adminkit/types/card'
 
-const cls = {
-  root: 'card', elevated: 'card--elevated', flat: 'card--flat',
-  header: 'card__header', body: 'card__body', footer: 'card__footer',
-} satisfies Record<string, CardClass>
-
 export const card = defineParts({
-  parts: { root: cls.root, header: cls.header, body: cls.body, footer: cls.footer },
-  variants: { variant: { elevated: { root: cls.elevated }, flat: { root: cls.flat } } },
+  parts: {
+    root: 'card',
+    header: 'card__header',
+    body: 'card__body',
+    footer: 'card__footer',
+  } satisfies Record<string, CardClass>,
+  variants: {
+    variant: {
+      elevated: { root: 'card--elevated' } satisfies Record<string, CardClass>,
+      flat: { root: 'card--flat' } satisfies Record<string, CardClass>,
+    },
+  },
   defaultVariants: { variant: 'elevated' },
 })
 

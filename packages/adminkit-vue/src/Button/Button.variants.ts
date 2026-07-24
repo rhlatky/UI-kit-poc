@@ -1,18 +1,20 @@
 import { defineVariants } from '../lib/defineVariants'
 import type { ButtonClass } from 'adminkit/types/button'
 
-// Class literals, checked against the generated ButtonClass union (single source
-// = css). Typo in a value → compile error; `cls.xy` typo → compile error. L2, no
-// runtime manifest (cls compiles into this component).
-const cls = {
-  root: 'button', sm: 'button--sm', md: 'button--md', lg: 'button--lg',
-  primary: 'button--primary', secondary: 'button--secondary', ghost: 'button--ghost',
+// Class literals checked against the generated ButtonClass union. You'd write this
+// variant→class map either way (cva/scss too) — here it doubles as the L2 check.
+const variant = {
+  primary: 'button--primary',
+  secondary: 'button--secondary',
+  ghost: 'button--ghost',
+} satisfies Record<string, ButtonClass>
+const size = {
+  sm: 'button--sm',
+  md: 'button--md',
+  lg: 'button--lg',
 } satisfies Record<string, ButtonClass>
 
-const variant = { primary: cls.primary, secondary: cls.secondary, ghost: cls.ghost }
-const size = { sm: cls.sm, md: cls.md, lg: cls.lg }
-
-export const button = defineVariants(cls.root, { variants: { variant, size }, defaultVariants: { size: 'md' } })
+export const button = defineVariants('button', { variants: { variant, size }, defaultVariants: { size: 'md' } })
 
 export type ButtonVariant = keyof typeof variant
 export type ButtonSize = keyof typeof size
