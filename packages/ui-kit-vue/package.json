@@ -1,0 +1,23 @@
+{
+  "name": "@ui-kit/vue",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "gen:types": "typed-scss-modules 'src/**/*.module.scss' --exportType default --includePaths ../ui-kit-css/src",
+    "typecheck": "vue-tsc --noEmit",
+    "build": "vue-tsc -b && vite build"
+  },
+  "dependencies": {
+    "@ui-kit/css": "workspace:*",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "sass": "^1.80.0",
+    "typed-scss-modules": "^8.1.1",
+    "typescript": "~5.6.3",
+    "vite": "^6.0.7",
+    "vue-tsc": "^2.2.0"
+  }
+}

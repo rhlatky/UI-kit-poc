@@ -1,0 +1,9 @@
+{
+  "name": "@ui-kit/twig",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Vanilla HTML + JS component implementations for the Twig/CMS side (no framework).",
+  "main": "src/index.js",
+  "dependencies": { "@ui-kit/css": "workspace:*" }
+}

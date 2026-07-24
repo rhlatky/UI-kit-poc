@@ -1,0 +1,19 @@
+// Source of truth for Input (BEM). Block: .field
+.field {
+  display: flex; flex-direction: column; gap: var(--ds-space-1);
+  font-family: var(--ds-font-sans);
+
+  &--disabled { opacity: .5; }
+  &__label { font-size: var(--ds-text-sm); font-weight: 600; color: var(--ds-color-text); }
+  &__input {
+    padding: var(--ds-space-2) var(--ds-space-3); font-size: var(--ds-text-md);
+    color: var(--ds-color-text); background: var(--ds-color-surface);
+    border: 1px solid var(--ds-color-border); border-radius: var(--ds-radius-md);
+    &:focus { outline: 2px solid var(--ds-color-primary); outline-offset: 1px; border-color: var(--ds-color-primary); }
+    &--invalid { border-color: #c0392b; }
+  }
+  &__msg {
+    margin: 0; font-size: var(--ds-text-sm); color: var(--ds-color-text);
+    &--invalid { color: #c0392b; }
+  }
+}

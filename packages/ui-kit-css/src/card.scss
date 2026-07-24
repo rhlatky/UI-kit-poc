@@ -1,0 +1,12 @@
+// Source of truth for Card (BEM). Block: .card
+.card {
+  overflow: hidden; font-family: var(--ds-font-sans); color: var(--ds-color-text);
+  background: var(--ds-color-surface); border: 1px solid var(--ds-color-border);
+  border-radius: var(--ds-radius-md);
+
+  &--elevated { box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+  &--flat { box-shadow: none; }
+  &__header { padding: var(--ds-space-3) var(--ds-space-4); font-weight: 700; border-bottom: 1px solid var(--ds-color-border); }
+  &__body { padding: var(--ds-space-4); }
+  &__footer { padding: var(--ds-space-3) var(--ds-space-4); font-size: var(--ds-text-sm); color: var(--ds-color-text); border-top: 1px solid var(--ds-color-border); }
+}
