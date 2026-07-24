@@ -1,9 +1,8 @@
-export declare const input: {
-  readonly "field": "field"
-  readonly "fieldDisabled": "field--disabled"
-  readonly "fieldLabel": "field__label"
-  readonly "fieldInput": "field__input"
-  readonly "fieldInputInvalid": "field__input--invalid"
-  readonly "fieldMsg": "field__msg"
-  readonly "fieldMsgInvalid": "field__msg--invalid"
-}
+export type InputClass =
+  | "field"
+  | "field--disabled"
+  | "field__label"
+  | "field__input"
+  | "field__input--invalid"
+  | "field__msg"
+  | "field__msg--invalid"

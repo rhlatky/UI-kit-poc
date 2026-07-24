@@ -1,8 +1,7 @@
-export declare const card: {
-  readonly "card": "card"
-  readonly "cardElevated": "card--elevated"
-  readonly "cardFlat": "card--flat"
-  readonly "cardHeader": "card__header"
-  readonly "cardBody": "card__body"
-  readonly "cardFooter": "card__footer"
-}
+export type CardClass =
+  | "card"
+  | "card--elevated"
+  | "card--flat"
+  | "card__header"
+  | "card__body"
+  | "card__footer"

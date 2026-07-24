@@ -1,9 +1,9 @@
 import { defineVariants } from '../variants.js'
-import { button as c } from '../classes/button.js'
-export const buttonClass = defineVariants(c.button, {
+// Plain BEM literals (checked against ButtonClass on the TS side; vanilla is plain JS).
+export const buttonClass = defineVariants('button', {
   variants: {
-    variant: { primary: c.buttonPrimary, secondary: c.buttonSecondary, ghost: c.buttonGhost },
-    size: { sm: c.buttonSm, md: c.buttonMd, lg: c.buttonLg },
+    variant: { primary: 'button--primary', secondary: 'button--secondary', ghost: 'button--ghost' },
+    size: { sm: 'button--sm', md: 'button--md', lg: 'button--lg' },
   },
   defaultVariants: { size: 'md' },
 })

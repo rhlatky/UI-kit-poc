@@ -8,12 +8,25 @@
     "./button.css": "./src/css/button.css",
     "./input.css": "./src/css/input.css",
     "./card.css": "./src/css/card.css",
-    "./variants": { "types": "./src/variants.d.ts", "default": "./src/variants.js" },
-    "./classes/button": { "types": "./src/classes/button.d.ts", "default": "./src/classes/button.js" },
-    "./classes/input": { "types": "./src/classes/input.d.ts", "default": "./src/classes/input.js" },
-    "./classes/card": { "types": "./src/classes/card.d.ts", "default": "./src/classes/card.js" },
+    "./variants": {
+      "types": "./src/variants.d.ts",
+      "default": "./src/variants.js"
+    },
+    "./classes/button": {
+      "types": "./src/classes/button.d.ts"
+    },
+    "./classes/input": {
+      "types": "./src/classes/input.d.ts"
+    },
+    "./classes/card": {
+      "types": "./src/classes/card.d.ts"
+    },
     "./dom": "./src/dom/index.js"
   },
-  "files": ["src"],
-  "scripts": { "gen": "node scripts/gen-classes.mjs" }
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "gen": "node scripts/gen-classes.mjs"
+  }
 }
