@@ -40,14 +40,24 @@ Typo proof: mistype a class key in `packages/adminkit-vue/src/Button/Button.vari
 3. **Variant map** — `packages/adminkit-vue/src/Badge/Badge.variants.ts`:
    `import { badge as m } from 'adminkit/generated-classes/badge'`, then
    `defineVariants(m.badge, { variants: { … } })` referencing `m.badgeSuccess`
-   etc (typo = compile error).
+   etc (typo = compile error). Inside this package import the resolver from
+   `../lib`; from outside it is `import { defineVariants } from '@adminkit/vue'`.
 4. **Component** — `Badge.vue`: `import 'adminkit/badge.css'`, wrap the resolver
    in a `computed`, bind `:class`. (a11y: label associations via `useId()`, etc.)
-5. **Export** — add `Badge/index.ts` and a line to `src/index.ts`.
+5. **Export** — add `Badge/index.ts` and a line to `src/index.ts`. That barrel is
+   auto-discovered as a build entry, so `@adminkit/vue/Badge` works too.
 
 Multi-part components (root/header/…) use `defineParts` instead of `defineVariants`
 — see `Input`/`Card`. `Button` shows `compoundVariants` (a class applied only when
 a whole combo matches). Button/Input/Card are **EXAMPLE references**, not a fixed API.
+
+## Public entry points
+| Import | Gives you |
+|---|---|
+| `@adminkit/vue` | components + `defineVariants`/`defineParts` |
+| `@adminkit/vue/Button` (`/Input`, `/Card`, `/lib`) | one barrel, for finer tree-shaking |
+| `adminkit/button.css`, `adminkit/tokens.css` | the styling contract (any runtime) |
+| `adminkit/generated-classes/button` | the `as const` class manifest |
 
 ## Theming
 `tokens.css` defines light tokens on `:root` and dark overrides on
