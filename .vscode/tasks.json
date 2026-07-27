@@ -2,11 +2,14 @@
   "version": "2.0.0",
   "tasks": [
     {
+      // Run explicitly (Tasks: Run Task). Deliberately NOT runOn: folderOpen — starting a
+      // background watch on every window open is a surprise, and more so once this package
+      // is one of many in a monorepo. `pnpm -C` keeps the path independent of the folder
+      // the editor was opened at, but it is still repo-root relative: re-point after a lift.
       "label": "adminkit: gen-classes (watch)",
       "type": "shell",
-      "command": "pnpm gen:classes:watch",
+      "command": "pnpm -C packages/adminkit gen:classes:watch",
       "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
       "presentation": { "reveal": "silent", "panel": "dedicated" },
       "problemMatcher": []
     }

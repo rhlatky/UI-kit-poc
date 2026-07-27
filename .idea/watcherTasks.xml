@@ -16,7 +16,7 @@
       <option name="outputFromStdout" value="true" />
       <option name="program" value="node" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="Project Files" />
+      <option name="scopeName" value="adminkit_css" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$ProjectFileDir$" />
       <envs />
