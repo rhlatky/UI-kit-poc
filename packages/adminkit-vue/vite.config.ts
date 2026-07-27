@@ -7,7 +7,7 @@ import dts from 'vite-plugin-dts'
 // vue + adminkit are external → not bundled; `import 'adminkit/*.css'` stays an
 // external import the consuming app resolves & dedupes.
 export default defineConfig({
-  plugins: [vue(), dts({ include: ['src'], exclude: ['**/*.vue.ts'] })],
+  plugins: [vue(), dts({ include: ['src'], exclude: ['**/*.vue.ts', '**/*.test.ts'] })],
   build: {
     lib: {
       entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),

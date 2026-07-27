@@ -1,7 +1,36 @@
+/* Design tokens. Colors are theme-scoped; sizing/typography are theme-agnostic.
+   Theming convention: set `data-theme="dark"` on <html> (or any ancestor) to opt
+   into dark. Light is the default (:root). */
+
 :root {
-  --ds-color-primary: #1e8449; --ds-color-primary-hover: #196f3d; --ds-color-primary-text: #fff;
-  --ds-color-surface: #fff; --ds-color-text: #1a1a1a; --ds-color-border: #d0d0d0; --ds-color-danger: #c0392b;
-  --ds-space-1: 4px; --ds-space-2: 8px; --ds-space-3: 12px; --ds-space-4: 16px; --ds-space-5: 24px;
-  --ds-radius-md: 8px; --ds-text-sm: 13px; --ds-text-md: 15px; --ds-text-lg: 18px;
+  /* color — light (default) */
+  --ds-color-primary: #1e8449;
+  --ds-color-primary-hover: #196f3d;
+  --ds-color-primary-text: #ffffff;
+  --ds-color-surface: #ffffff;
+  --ds-color-text: #1a1a1a;
+  --ds-color-border: #d0d0d0;
+  --ds-color-danger: #c0392b;
+
+  /* sizing / typography (theme-agnostic) */
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-5: 24px;
+  --ds-radius-md: 8px;
+  --ds-text-sm: 13px;
+  --ds-text-md: 15px;
+  --ds-text-lg: 18px;
   --ds-font-sans: system-ui, sans-serif;
+}
+
+[data-theme='dark'] {
+  --ds-color-primary: #2ecc71;
+  --ds-color-primary-hover: #27ae60;
+  --ds-color-primary-text: #0b1f14;
+  --ds-color-surface: #1e1e1e;
+  --ds-color-text: #e8e8e8;
+  --ds-color-border: #3a3a3a;
+  --ds-color-danger: #e74c3c;
 }
