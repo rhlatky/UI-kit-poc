@@ -63,3 +63,9 @@
     }
   }
 }
+
+/* compoundVariants EXAMPLE — applied only when variant=primary AND size=lg */
+.button--primary-lg {
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}

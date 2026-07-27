@@ -6,4 +6,5 @@ export const button = {
   "buttonPrimary": "button--primary",
   "buttonSecondary": "button--secondary",
   "buttonGhost": "button--ghost",
+  "buttonPrimaryLg": "button--primary-lg",
 } as const

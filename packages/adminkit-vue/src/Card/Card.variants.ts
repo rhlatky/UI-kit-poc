@@ -1,3 +1,4 @@
+/* EXAMPLE component — reference for the authoring pattern. Replace/extend as the DS grows. */
 import { defineParts } from '../lib/defineVariants'
 import { card as m } from 'adminkit/generated-classes/card'
 

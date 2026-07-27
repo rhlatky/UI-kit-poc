@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// EXAMPLE component — reference implementation, not a locked API.
 import { computed } from 'vue'
 import 'adminkit/card.css'
 import { card, type CardProps } from './Card.variants'

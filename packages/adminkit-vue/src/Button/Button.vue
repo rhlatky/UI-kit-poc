@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// EXAMPLE component — reference implementation, not a locked API.
 import { computed } from 'vue'
 import 'adminkit/button.css'
 import { button, type ButtonProps } from './Button.variants'

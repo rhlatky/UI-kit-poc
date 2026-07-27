@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// EXAMPLE component — reference implementation, not a locked API.
 import { computed, useId } from 'vue'
 import 'adminkit/input.css'
 import { field } from './Input.variants'
