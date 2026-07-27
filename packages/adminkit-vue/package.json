@@ -1,14 +1,29 @@
 {
   "name": "@adminkit/vue",
   "version": "0.0.0",
-  "private": true,
   "type": "module",
-  "scripts": { "typecheck": "vue-tsc --noEmit" },
-  "dependencies": { "adminkit": "workspace:*", "vue": "^3.5.13" },
+  "description": "Vue 3 components for adminkit (Button/Input/Card) + variant resolver.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./*": { "types": "./dist/*.d.ts", "import": "./dist/*.js" }
+  },
+  "files": ["dist"],
+  "sideEffects": ["**/*.css"],
+  "scripts": {
+    "typecheck": "vue-tsc --noEmit",
+    "build": "vite build"
+  },
+  "peerDependencies": { "vue": "^3.5.0" },
+  "dependencies": { "adminkit": "workspace:^" },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
     "typescript": "~5.6.3",
     "vite": "^6.0.7",
+    "vite-plugin-dts": "^4.3.0",
+    "vue": "^3.5.13",
     "vue-tsc": "^2.2.0"
   }
 }

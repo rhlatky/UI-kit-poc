@@ -10,4 +10,9 @@ export const button = defineVariants(m.button, { variants: { variant, size }, de
 
 export type ButtonVariant = keyof typeof variant
 export type ButtonSize = keyof typeof size
-export type ButtonProps = { variant: ButtonVariant; size?: ButtonSize; disabled?: boolean }
+export type ButtonProps = {
+  variant: ButtonVariant
+  size?: ButtonSize
+  disabled?: boolean
+  type?: 'button' | 'submit' | 'reset'
+}

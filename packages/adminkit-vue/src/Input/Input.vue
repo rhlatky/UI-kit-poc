@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useId } from 'vue'
 import 'adminkit/input.css'
 import { field } from './Input.variants'
 
@@ -8,15 +8,26 @@ const props = withDefaults(
   {},
 )
 defineEmits<{ 'update:modelValue': [value: string] }>()
+
 const s = computed(() => field({ invalid: !!props.error, disabled: props.disabled }))
+const inputId = useId()
+const msgId = useId()
 </script>
 
 <template>
   <div :class="s.root">
-    <label v-if="label" :class="s.label">{{ label }}</label>
-    <input :class="s.input" :value="modelValue" :placeholder="placeholder" :disabled="disabled"
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)" />
-    <p v-if="error" :class="s.msg">{{ error }}</p>
-    <p v-else-if="hint" :class="s.msg">{{ hint }}</p>
+    <label v-if="label" :class="s.label" :for="inputId">{{ label }}</label>
+    <input
+      :id="inputId"
+      :class="s.input"
+      :value="modelValue"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :aria-invalid="error ? 'true' : undefined"
+      :aria-describedby="error || hint ? msgId : undefined"
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+    />
+    <p v-if="error" :id="msgId" :class="s.msg">{{ error }}</p>
+    <p v-else-if="hint" :id="msgId" :class="s.msg">{{ hint }}</p>
   </div>
 </template>
