@@ -10,28 +10,28 @@ const cssFiles = readdirSync(cssDir).filter((f) => f.endsWith('.css'))
 
 describe('extractTokens', () => {
   it('reads declarations and dedupes the theme redeclarations', () => {
-    const css = `:root { --ds-color-primary: red; --ds-space-1: 4px; }
-                 [data-theme='dark'] { --ds-color-primary: pink; }`
-    expect(extractTokens(css)).toEqual(['--ds-color-primary', '--ds-space-1'])
+    const css = `:root { --ak-color-primary: red; --ak-space-1: 4px; }
+                 [data-theme='dark'] { --ak-color-primary: pink; }`
+    expect(extractTokens(css)).toEqual(['--ak-color-primary', '--ak-space-1'])
   })
 
   it('does not treat a var() reference as a declaration', () => {
-    expect(extractTokens('.a { color: var(--ds-color-text); }')).toEqual([])
+    expect(extractTokens('.a { color: var(--ak-color-text); }')).toEqual([])
   })
 
   it('ignores declarations in comments', () => {
-    expect(extractTokens('/* --ds-gone: 1px; */ :root { --ds-here: 2px; }')).toEqual(['--ds-here'])
+    expect(extractTokens('/* --ak-gone: 1px; */ :root { --ak-here: 2px; }')).toEqual(['--ak-here'])
   })
 })
 
 describe('extractTokenRefs', () => {
   it('reads var() references, including with a fallback', () => {
-    const css = '.a { color: var(--ds-color-text); gap: var( --ds-space-2 , 8px); }'
-    expect(extractTokenRefs(css)).toEqual(['--ds-color-text', '--ds-space-2'])
+    const css = '.a { color: var(--ak-color-text); gap: var( --ak-space-2 , 8px); }'
+    expect(extractTokenRefs(css)).toEqual(['--ak-color-text', '--ak-space-2'])
   })
 
   it('does not treat a declaration as a reference', () => {
-    expect(extractTokenRefs(':root { --ds-color-text: red; }')).toEqual([])
+    expect(extractTokenRefs(':root { --ak-color-text: red; }')).toEqual([])
   })
 })
 
@@ -49,5 +49,9 @@ describe('token contract', () => {
   it('the shipped css actually uses tokens', () => {
     const used = cssFiles.flatMap((f) => extractTokenRefs(read(f)))
     expect(used.length).toBeGreaterThan(0)
+  })
+
+  it('every declared token carries the ak namespace', () => {
+    expect([...declared].filter((name) => !name.startsWith('--ak-'))).toEqual([])
   })
 })

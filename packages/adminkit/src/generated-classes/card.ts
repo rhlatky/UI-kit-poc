@@ -1,8 +1,8 @@
 export const card = {
-  "card": "card",
-  "cardElevated": "card--elevated",
-  "cardFlat": "card--flat",
-  "cardHeader": "card__header",
-  "cardBody": "card__body",
-  "cardFooter": "card__footer",
+  "card": "ak-card",
+  "cardElevated": "ak-card--elevated",
+  "cardFlat": "ak-card--flat",
+  "cardHeader": "ak-card__header",
+  "cardBody": "ak-card__body",
+  "cardFooter": "ak-card__footer",
 } as const

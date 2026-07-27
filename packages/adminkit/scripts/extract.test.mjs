@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
-import { camel, extractClasses } from './extract.mjs'
+import { camel, classKey, extractClasses, tokenKey } from './extract.mjs'
 
 const cssDir = join(dirname(fileURLToPath(import.meta.url)), '../src/css')
 const read = (f) => readFileSync(join(cssDir, f), 'utf8')
@@ -45,24 +45,24 @@ describe('extractClasses', () => {
 
   it('matches the shipped css exactly', () => {
     expect(extractClasses(read('button.css'))).toEqual([
-      'button',
-      'button--sm',
-      'button--md',
-      'button--lg',
-      'button--primary',
-      'button--secondary',
-      'button--ghost',
-      'button--primary-lg',
+      'ak-button',
+      'ak-button--sm',
+      'ak-button--md',
+      'ak-button--lg',
+      'ak-button--primary',
+      'ak-button--secondary',
+      'ak-button--ghost',
+      'ak-button--primary-lg',
     ])
-    expect(extractClasses(read('card.css'))).toEqual(['card', 'card--elevated', 'card--flat', 'card__header', 'card__body', 'card__footer'])
+    expect(extractClasses(read('card.css'))).toEqual(['ak-card', 'ak-card--elevated', 'ak-card--flat', 'ak-card__header', 'ak-card__body', 'ak-card__footer'])
     expect(extractClasses(read('input.css'))).toEqual([
-      'field',
-      'field--disabled',
-      'field__label',
-      'field__input',
-      'field__input--invalid',
-      'field__msg',
-      'field__msg--invalid',
+      'ak-field',
+      'ak-field--disabled',
+      'ak-field__label',
+      'ak-field__input',
+      'ak-field__input--invalid',
+      'ak-field__msg',
+      'ak-field__msg--invalid',
     ])
   })
 })
@@ -73,5 +73,32 @@ describe('camel', () => {
     expect(camel('field__input--invalid')).toBe('fieldInputInvalid')
     expect(camel('button--primary-lg')).toBe('buttonPrimaryLg')
     expect(camel('card')).toBe('card')
+  })
+})
+
+// The manifest keys are the authoring surface, so the namespace must not leak into them:
+// `m.buttonPrimary`, not `m.akButtonPrimary`.
+describe('manifest keys', () => {
+  it('strips the class namespace', () => {
+    expect(classKey('ak-button')).toBe('button')
+    expect(classKey('ak-button--primary-lg')).toBe('buttonPrimaryLg')
+    expect(classKey('ak-field__input--invalid')).toBe('fieldInputInvalid')
+  })
+
+  it('strips the token namespace', () => {
+    expect(tokenKey('--ak-color-primary')).toBe('colorPrimary')
+    expect(tokenKey('--ak-space-1')).toBe('space1')
+  })
+
+  it('leaves a name without the namespace alone', () => {
+    expect(classKey('legacy-button')).toBe('legacyButton')
+    expect(tokenKey('--other-color')).toBe('otherColor')
+  })
+
+  it('every shipped class keeps a namespaced value and a clean key', () => {
+    for (const className of extractClasses(read('button.css'))) {
+      expect(className.startsWith('ak-')).toBe(true)
+      expect(classKey(className).startsWith('ak')).toBe(false)
+    }
   })
 })

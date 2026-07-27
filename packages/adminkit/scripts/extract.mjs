@@ -20,6 +20,14 @@ const TOKEN_REF = /var\(\s*(--[\w-]+)/g
 
 export const camel = (s) => s.replace(/[-_]+([a-zA-Z0-9])/g, (_, c) => c.toUpperCase())
 
+// The `ak-` namespace keeps the css from colliding with a host app's global styles. It is
+// stripped from manifest KEYS so authoring stays `m.buttonPrimary` / `t.colorPrimary`,
+// while the values carry the real, namespaced names.
+// The leading `--` is css syntax rather than part of the name, so it goes even when the
+// namespace is absent — otherwise camel() reads it as a separator and yields `OtherColor`.
+export const classKey = (className) => camel(className.replace(/^ak-/, ''))
+export const tokenKey = (tokenName) => camel(tokenName.replace(/^--(?:ak-)?/, ''))
+
 export function extractClasses(css) {
   const selectors = [...css.replace(COMMENTS, '').matchAll(RULE_PRELUDES)]
     .map((m) => m[1].trim())

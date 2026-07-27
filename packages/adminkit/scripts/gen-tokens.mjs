@@ -8,18 +8,16 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
-import { camel, extractTokens } from './extract.mjs'
+import { tokenKey, extractTokens } from './extract.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const source = join(root, 'src/css/tokens.css')
 const out = join(root, 'src/generated-tokens.ts')
 
-const PREFIX = /^--ds-/
-
 export function genTokens() {
   const tokens = extractTokens(readFileSync(source, 'utf8'))
   const entries = tokens
-    .map((name) => `  ${JSON.stringify(camel(name.replace(PREFIX, '')))}: ${JSON.stringify(name)}`)
+    .map((name) => `  ${JSON.stringify(tokenKey(name))}: ${JSON.stringify(name)}`)
     .join(',\n')
 
   writeFileSync(out, `export const tokens = {\n${entries},\n} as const\n`)

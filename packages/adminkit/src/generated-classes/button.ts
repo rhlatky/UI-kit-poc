@@ -1,10 +1,10 @@
 export const button = {
-  "button": "button",
-  "buttonSm": "button--sm",
-  "buttonMd": "button--md",
-  "buttonLg": "button--lg",
-  "buttonPrimary": "button--primary",
-  "buttonSecondary": "button--secondary",
-  "buttonGhost": "button--ghost",
-  "buttonPrimaryLg": "button--primary-lg",
+  "button": "ak-button",
+  "buttonSm": "ak-button--sm",
+  "buttonMd": "ak-button--md",
+  "buttonLg": "ak-button--lg",
+  "buttonPrimary": "ak-button--primary",
+  "buttonSecondary": "ak-button--secondary",
+  "buttonGhost": "ak-button--ghost",
+  "buttonPrimaryLg": "ak-button--primary-lg",
 } as const

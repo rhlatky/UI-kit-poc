@@ -5,7 +5,7 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, rmSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
-import { camel, extractClasses } from './extract.mjs'
+import { classKey, extractClasses } from './extract.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const cssDir = join(root, 'src/css')
@@ -19,7 +19,7 @@ const cssNames = () =>
 function genFile(file) {
   const name = file.replace(/\.css$/, '')
   const classes = extractClasses(readFileSync(join(cssDir, file), 'utf8'))
-  const entries = classes.map((c) => `  ${JSON.stringify(camel(c))}: ${JSON.stringify(c)}`).join(',\n')
+  const entries = classes.map((c) => `  ${JSON.stringify(classKey(c))}: ${JSON.stringify(c)}`).join(',\n')
   writeFileSync(join(outDir, `${name}.ts`), `export const ${name} = {\n${entries},\n} as const\n`)
   console.log(`[generated-classes] ${name}: ${classes.length} classes`)
 }

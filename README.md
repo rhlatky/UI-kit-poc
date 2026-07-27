@@ -4,6 +4,10 @@ Design-system PoC. Plain BEM CSS is the source of truth. A generated manifest ma
 those class names type-safe in Vue, so Vue, Twig and static HTML all emit the exact
 same strings.
 
+Everything is namespaced `ak-` / `--ak-` to stay clear of a host app's global css. The
+namespace is stripped from the manifest keys, so authoring is still `m.buttonPrimary`
+and `t.colorPrimary`.
+
 | Package | What it is |
 |---|---|
 | `adminkit` | css + tokens + generated class manifest. No JS logic. |
@@ -24,7 +28,7 @@ import { Button } from '@adminkit/vue'
 Twig, or any other template language, writes the same classes by convention — no JS:
 
 ```html
-<button class="button button--primary button--lg">Save</button>
+<button class="ak-button ak-button--primary ak-button--lg">Save</button>
 ```
 
 Import paths: `@adminkit/vue` (components + `defineVariants`/`defineParts`),
@@ -71,7 +75,7 @@ import { tokens as t } from 'adminkit/generated-tokens'
 document.documentElement.style.setProperty(t.colorPrimary, '#0071e3')
 ```
 
-`pnpm -C packages/adminkit test` also checks the reverse direction: every `var(--ds-…)`
+`pnpm -C packages/adminkit test` also checks the reverse direction: every `var(--ak-…)`
 in the shipped css must resolve to a token declared in `tokens.css`.
 
 ```bash
