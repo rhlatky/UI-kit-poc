@@ -1,6 +1,6 @@
 {
   "name": "@adminkit/vue",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "description": "Vue 3 components for adminkit (Button/Input/Card) + variant resolver.",
   "main": "./dist/index.js",
