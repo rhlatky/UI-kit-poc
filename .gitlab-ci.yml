@@ -1,0 +1,19 @@
+image: containers.wdev.sk/infra/containers/node:24-ci
+
+stages:
+  - code_quality
+
+verify:
+  stage: code_quality
+  # verify.sh is the whole contract — generate manifests, fail on drift, typecheck, unit tests.
+  script:
+    - corepack enable
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile
+    - ./verify.sh
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - .pnpm-store
