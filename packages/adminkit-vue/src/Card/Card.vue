@@ -4,7 +4,8 @@ import { computed } from 'vue'
 import 'adminkit/card.css'
 import { card, type CardProps } from './Card.variants'
 
-const props = withDefaults(defineProps<CardProps>(), { variant: 'elevated' })
+// No withDefaults: `variant` defaults in Card.variants.ts (defaultVariants).
+const props = defineProps<CardProps>()
 const s = computed(() => card(props))
 </script>
 

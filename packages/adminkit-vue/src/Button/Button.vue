@@ -4,7 +4,10 @@ import { computed } from 'vue'
 import 'adminkit/button.css'
 import { button, type ButtonProps } from './Button.variants'
 
-const props = withDefaults(defineProps<ButtonProps>(), { size: 'md', disabled: false, type: 'button' })
+// Only DOM attributes get defaults here. Style defaults (variant, size) belong to
+// defaultVariants in Button.variants.ts — see the note there. `disabled` needs no
+// entry: Vue casts an absent boolean prop to false.
+const props = withDefaults(defineProps<ButtonProps>(), { type: 'button' })
 const cls = computed(() => button(props))
 </script>
 
