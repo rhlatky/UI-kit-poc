@@ -10,3 +10,12 @@ export const field = defineParts({
   },
   defaultVariants: { invalid: false, disabled: false },
 })
+
+export type InputProps = {
+  label?: string
+  hint?: string
+  error?: string
+  placeholder?: string
+  disabled?: boolean
+  modelValue?: string
+}

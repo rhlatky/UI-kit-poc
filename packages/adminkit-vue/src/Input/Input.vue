@@ -2,12 +2,9 @@
 // EXAMPLE component — reference implementation, not a locked API.
 import { computed, useId } from 'vue'
 import 'adminkit/input.css'
-import { field } from './Input.variants'
+import { field, type InputProps } from './Input.variants'
 
-const props = withDefaults(
-  defineProps<{ label?: string; hint?: string; error?: string; placeholder?: string; disabled?: boolean; modelValue?: string }>(),
-  {},
-)
+const props = defineProps<InputProps>()
 defineEmits<{ 'update:modelValue': [value: string] }>()
 
 const s = computed(() => field({ invalid: !!props.error, disabled: props.disabled }))
