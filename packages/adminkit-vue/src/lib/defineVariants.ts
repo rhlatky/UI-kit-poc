@@ -20,7 +20,9 @@ export function defineVariants<V extends Record<string, Values>>(
       if (className) classes.push(className)
     }
     for (const { class: className, ...condition } of config.compoundVariants ?? []) {
-      if (className && conditionMatches(selected, condition as PropBag)) classes.push(className)
+      if (className && conditionMatches(selected, condition as PropBag)) {
+        classes.push(className)
+      }
     }
     return classes.join(' ')
   }

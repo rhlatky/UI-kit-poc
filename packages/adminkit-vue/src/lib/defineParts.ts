@@ -3,7 +3,7 @@ import { resolveSelection, conditionMatches, type Selection, type PropBag } from
 // variantName → variantValue → { part: class }
 type PartsConfig<P> = Record<string, Record<string, Partial<Record<keyof P, string>>>>
 
-/** Resolve a class string per named part (tailwind-variants `slots`). Returns a
+/** Resolve a class string per named part. Returns a
     (props) => { [part]: string }. */
 export function defineParts<P extends Record<string, string>, V extends PartsConfig<P>>(config: {
   parts: P
@@ -23,11 +23,15 @@ export function defineParts<P extends Record<string, string>, V extends PartsCon
 
       for (const name in selected) {
         const partClass = config.variants?.[name][String(selected[name])]?.[part]
-        if (partClass) classes.push(partClass)
+        if (partClass) {
+          classes.push(partClass)
+        }
       }
       for (const { class: partClasses, ...condition } of config.compoundVariants ?? []) {
         const partClass = partClasses[part]
-        if (partClass && conditionMatches(selected, condition as PropBag)) classes.push(partClass)
+        if (partClass && conditionMatches(selected, condition as PropBag)) {
+          classes.push(partClass)
+        }
       }
       result[part] = classes.filter(Boolean).join(' ')
     }
