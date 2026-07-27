@@ -9,5 +9,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/generated-classes/**/*.ts"]
+  "include": ["src/generated-classes/**/*.ts", "src/generated-tokens.ts"]
 }

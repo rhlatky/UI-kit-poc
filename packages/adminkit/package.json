@@ -12,6 +12,7 @@
     "./generated-classes/button": "./src/generated-classes/button.ts",
     "./generated-classes/input": "./src/generated-classes/input.ts",
     "./generated-classes/card": "./src/generated-classes/card.ts",
+    "./generated-tokens": "./src/generated-tokens.ts",
     "./package.json": "./package.json"
   },
   "publishConfig": {
@@ -23,14 +24,15 @@
       "./generated-classes/button": { "types": "./dist/generated-classes/button.d.ts", "default": "./dist/generated-classes/button.js" },
       "./generated-classes/input": { "types": "./dist/generated-classes/input.d.ts", "default": "./dist/generated-classes/input.js" },
       "./generated-classes/card": { "types": "./dist/generated-classes/card.d.ts", "default": "./dist/generated-classes/card.js" },
+      "./generated-tokens": { "types": "./dist/generated-tokens.d.ts", "default": "./dist/generated-tokens.js" },
       "./package.json": "./package.json"
     }
   },
   "files": ["dist", "src/css"],
   "scripts": {
-    "gen:classes": "node scripts/gen-classes.mjs",
-    "gen:classes:watch": "node scripts/gen-classes.mjs --watch",
-    "build": "pnpm gen:classes && tsc -p tsconfig.build.json",
+    "gen": "node scripts/gen.mjs",
+    "gen:watch": "node scripts/gen.mjs --watch",
+    "build": "pnpm gen && tsc -p tsconfig.build.json",
     "test": "vitest run"
   },
   "devDependencies": { "typescript": "~5.6.3", "vitest": "^4.1.10" }

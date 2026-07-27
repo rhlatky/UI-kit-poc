@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
-import { camel, extractClasses } from './extract-classes.mjs'
+import { camel, extractClasses } from './extract.mjs'
 
 const cssDir = join(dirname(fileURLToPath(import.meta.url)), '../src/css')
 const read = (f) => readFileSync(join(cssDir, f), 'utf8')

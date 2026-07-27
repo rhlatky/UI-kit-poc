@@ -2,9 +2,9 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "adminkit: gen-classes (watch)",
+      "label": "adminkit: gen manifests (watch)",
       "type": "shell",
-      "command": "pnpm -C packages/adminkit gen:classes:watch",
+      "command": "pnpm -C packages/adminkit gen:watch",
       "isBackground": true,
       "presentation": { "reveal": "silent", "panel": "dedicated" },
       "problemMatcher": []

@@ -1,17 +1,15 @@
 // css → generated-classes/<name>.ts : a generated `as const` key→value manifest of the
 // file's class names (camelCased key → BEM string). Gives Vue both the runtime
 // values AND literal types (m.buttonPrimaryy = compile error). No hand-written map.
-// Run once, or with `--watch` to regenerate on css save (zero-dep fs.watch).
-import { readFileSync, writeFileSync, readdirSync, mkdirSync, rmSync, watch } from 'node:fs'
+// Run directly, or through gen.mjs, which also generates the token manifest.
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, rmSync } from 'node:fs'
 import { join, dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { camel, extractClasses } from './extract-classes.mjs'
+import { fileURLToPath, pathToFileURL } from 'node:url'
+import { camel, extractClasses } from './extract.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const cssDir = join(root, 'src/css')
 const outDir = join(root, 'src/generated-classes')
-
-mkdirSync(outDir, { recursive: true }) // may be absent on a clean checkout / after a manual wipe
 
 const cssNames = () =>
   readdirSync(cssDir)
@@ -26,7 +24,8 @@ function genFile(file) {
   console.log(`[generated-classes] ${name}: ${classes.length} classes`)
 }
 
-function genAll() {
+export function genClasses() {
+  mkdirSync(outDir, { recursive: true }) // absent on a clean checkout / after a manual wipe
   const names = cssNames()
   for (const name of names) genFile(`${name}.css`)
   prune(names)
@@ -44,20 +43,4 @@ function prune(names) {
   }
 }
 
-genAll()
-
-if (process.argv.includes('--watch')) {
-  console.log('[generated-classes] watching', cssDir)
-  let timer
-  watch(cssDir, (_event, file) => {
-    if (!file || !file.endsWith('.css') || file === 'tokens.css') return
-    clearTimeout(timer) // debounce bursty save events
-    timer = setTimeout(() => {
-      try {
-        genFile(file)
-      } catch {
-        genAll() // file renamed/removed — resync everything
-      }
-    }, 50)
-  })
-}
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) genClasses()

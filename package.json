@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "gen:classes": "node packages/adminkit/scripts/gen-classes.mjs",
-    "gen:classes:watch": "node packages/adminkit/scripts/gen-classes.mjs --watch"
+    "gen": "node packages/adminkit/scripts/gen.mjs",
+    "gen:watch": "node packages/adminkit/scripts/gen.mjs --watch"
   }
 }
