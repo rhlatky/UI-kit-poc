@@ -3,7 +3,19 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Plain BEM CSS (source of truth) + generated as-const class manifest + tokens. No sass, no css-modules, no JS logic.",
-  "sideEffects": ["**/*.css"],
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhlatky/UI-kit-poc.git"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "//private": "Guard, not a decision: nothing publishes by accident. Drop it when publishing becomes deliberate — publishConfig below is already set up for that day.",
+  "private": true,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
     "./tokens.css": "./src/css/tokens.css",
     "./button.css": "./src/css/button.css",
@@ -21,19 +33,37 @@
       "./button.css": "./src/css/button.css",
       "./input.css": "./src/css/input.css",
       "./card.css": "./src/css/card.css",
-      "./generated-classes/button": { "types": "./dist/generated-classes/button.d.ts", "default": "./dist/generated-classes/button.js" },
-      "./generated-classes/input": { "types": "./dist/generated-classes/input.d.ts", "default": "./dist/generated-classes/input.js" },
-      "./generated-classes/card": { "types": "./dist/generated-classes/card.d.ts", "default": "./dist/generated-classes/card.js" },
-      "./generated-tokens": { "types": "./dist/generated-tokens.d.ts", "default": "./dist/generated-tokens.js" },
+      "./generated-classes/button": {
+        "types": "./dist/generated-classes/button.d.ts",
+        "default": "./dist/generated-classes/button.js"
+      },
+      "./generated-classes/input": {
+        "types": "./dist/generated-classes/input.d.ts",
+        "default": "./dist/generated-classes/input.js"
+      },
+      "./generated-classes/card": {
+        "types": "./dist/generated-classes/card.d.ts",
+        "default": "./dist/generated-classes/card.js"
+      },
+      "./generated-tokens": {
+        "types": "./dist/generated-tokens.d.ts",
+        "default": "./dist/generated-tokens.js"
+      },
       "./package.json": "./package.json"
     }
   },
-  "files": ["dist", "src/css"],
+  "files": [
+    "dist",
+    "src/css"
+  ],
   "scripts": {
     "gen": "node scripts/gen.mjs",
     "gen:watch": "node scripts/gen.mjs --watch",
     "build": "pnpm gen && tsc -p tsconfig.build.json",
     "test": "vitest run"
   },
-  "devDependencies": { "typescript": "~5.6.3", "vitest": "^4.1.10" }
+  "devDependencies": {
+    "typescript": "~5.6.3",
+    "vitest": "^4.1.10"
+  }
 }

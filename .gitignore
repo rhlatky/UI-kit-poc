@@ -9,3 +9,4 @@ dist
 !.idea/scopes/
 .vscode/*
 !.vscode/tasks.json
+.pnpm-store
