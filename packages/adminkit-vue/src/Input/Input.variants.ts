@@ -1,5 +1,5 @@
 /* EXAMPLE component — reference for the authoring pattern. Replace/extend as the DS grows. */
-import { defineParts } from '../lib/defineVariants'
+import { defineParts } from '../lib'
 import { input as m } from 'adminkit/generated-classes/input'
 
 export const field = defineParts({

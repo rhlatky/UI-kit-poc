@@ -1,6 +1,6 @@
 /* EXAMPLE component — reference for the authoring pattern (css → generated
    manifest → defineVariants). Not a fixed API; replace/extend as the DS grows. */
-import { defineVariants } from '../lib/defineVariants'
+import { defineVariants } from '../lib'
 import { button as m } from 'adminkit/generated-classes/button'
 
 const variant = { primary: m.buttonPrimary, secondary: m.buttonSecondary, ghost: m.buttonGhost }
