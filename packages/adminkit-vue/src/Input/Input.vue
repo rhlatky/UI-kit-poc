@@ -25,7 +25,9 @@ const msgId = useId()
       :aria-describedby="error || hint ? msgId : undefined"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
-    <p v-if="error" :id="msgId" :class="s.msg">{{ error }}</p>
+    <!-- role="alert" so a validation error that appears after render is announced;
+         the hint is static description, not an alert -->
+    <p v-if="error" :id="msgId" :class="s.msg" role="alert">{{ error }}</p>
     <p v-else-if="hint" :id="msgId" :class="s.msg">{{ hint }}</p>
   </div>
 </template>
