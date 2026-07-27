@@ -5,11 +5,11 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, rmSync, watch } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { camel, extractClasses } from './extract-classes.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const cssDir = join(root, 'src/css')
 const outDir = join(root, 'src/generated-classes')
-const camel = (s) => s.replace(/[-_]+([a-zA-Z0-9])/g, (_, c) => c.toUpperCase())
 
 mkdirSync(outDir, { recursive: true }) // may be absent on a clean checkout / after a manual wipe
 
@@ -20,8 +20,7 @@ const cssNames = () =>
 
 function genFile(file) {
   const name = file.replace(/\.css$/, '')
-  const css = readFileSync(join(cssDir, file), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '') // strip comments
-  const classes = [...new Set([...css.matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)].map((m) => m[1]))]
+  const classes = extractClasses(readFileSync(join(cssDir, file), 'utf8'))
   const entries = classes.map((c) => `  ${JSON.stringify(camel(c))}: ${JSON.stringify(c)}`).join(',\n')
   writeFileSync(join(outDir, `${name}.ts`), `export const ${name} = {\n${entries},\n} as const\n`)
   console.log(`[generated-classes] ${name}: ${classes.length} classes`)

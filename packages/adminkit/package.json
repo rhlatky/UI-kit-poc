@@ -1,6 +1,6 @@
 {
   "name": "adminkit",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "description": "Plain BEM CSS (source of truth) + generated as-const class manifest + tokens. No sass, no css-modules, no JS logic.",
   "sideEffects": ["**/*.css"],
@@ -11,7 +11,8 @@
     "./card.css": "./src/css/card.css",
     "./generated-classes/button": "./src/generated-classes/button.ts",
     "./generated-classes/input": "./src/generated-classes/input.ts",
-    "./generated-classes/card": "./src/generated-classes/card.ts"
+    "./generated-classes/card": "./src/generated-classes/card.ts",
+    "./package.json": "./package.json"
   },
   "publishConfig": {
     "exports": {
@@ -21,14 +22,16 @@
       "./card.css": "./src/css/card.css",
       "./generated-classes/button": { "types": "./dist/generated-classes/button.d.ts", "default": "./dist/generated-classes/button.js" },
       "./generated-classes/input": { "types": "./dist/generated-classes/input.d.ts", "default": "./dist/generated-classes/input.js" },
-      "./generated-classes/card": { "types": "./dist/generated-classes/card.d.ts", "default": "./dist/generated-classes/card.js" }
+      "./generated-classes/card": { "types": "./dist/generated-classes/card.d.ts", "default": "./dist/generated-classes/card.js" },
+      "./package.json": "./package.json"
     }
   },
   "files": ["dist", "src/css"],
   "scripts": {
     "gen:classes": "node scripts/gen-classes.mjs",
     "gen:classes:watch": "node scripts/gen-classes.mjs --watch",
-    "build": "pnpm gen:classes && tsc -p tsconfig.build.json"
+    "build": "pnpm gen:classes && tsc -p tsconfig.build.json",
+    "test": "vitest run"
   },
-  "devDependencies": { "typescript": "~5.6.3" }
+  "devDependencies": { "typescript": "~5.6.3", "vitest": "^4.1.10" }
 }

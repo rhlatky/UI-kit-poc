@@ -13,6 +13,9 @@ importers:
       typescript:
         specifier: ~5.6.3
         version: 5.6.3
+      vitest:
+        specifier: ^4.1.10
+        version: 4.1.10(vite@6.4.3(sass@1.101.6))
 
   packages/adminkit-vue:
     dependencies:
