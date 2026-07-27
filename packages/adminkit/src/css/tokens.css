@@ -3,6 +3,10 @@
    into dark. Light is the default (:root). */
 
 :root {
+  /* tells the browser which palette to use for native UI it paints itself:
+     caret, scrollbars, autofill, date/select popups, form-control defaults */
+  color-scheme: light;
+
   /* color — light (default) */
   --ds-color-primary: #1e8449;
   --ds-color-primary-hover: #196f3d;
@@ -26,6 +30,8 @@
 }
 
 [data-theme='dark'] {
+  color-scheme: dark;
+
   --ds-color-primary: #2ecc71;
   --ds-color-primary-hover: #27ae60;
   --ds-color-primary-text: #0b1f14;

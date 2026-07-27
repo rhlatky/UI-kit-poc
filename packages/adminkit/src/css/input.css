@@ -20,6 +20,8 @@
 
 .field__input {
   padding: var(--ds-space-2) var(--ds-space-3);
+  /* form controls do not inherit font-family — opt in explicitly */
+  font-family: inherit;
   font-size: var(--ds-text-md);
   color: var(--ds-color-text);
   background: var(--ds-color-surface);
