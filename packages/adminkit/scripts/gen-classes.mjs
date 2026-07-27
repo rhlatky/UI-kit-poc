@@ -2,7 +2,7 @@
 // file's class names (camelCased key → BEM string). Gives Vue both the runtime
 // values AND literal types (m.buttonPrimaryy = compile error). No hand-written map.
 // Run once, or with `--watch` to regenerate on css save (zero-dep fs.watch).
-import { readFileSync, writeFileSync, readdirSync, watch } from 'node:fs'
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, rmSync, watch } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -10,6 +10,13 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const cssDir = join(root, 'src/css')
 const outDir = join(root, 'src/generated-classes')
 const camel = (s) => s.replace(/[-_]+([a-zA-Z0-9])/g, (_, c) => c.toUpperCase())
+
+mkdirSync(outDir, { recursive: true }) // may be absent on a clean checkout / after a manual wipe
+
+const cssNames = () =>
+  readdirSync(cssDir)
+    .filter((f) => f.endsWith('.css') && f !== 'tokens.css')
+    .map((f) => f.replace(/\.css$/, ''))
 
 function genFile(file) {
   const name = file.replace(/\.css$/, '')
@@ -21,7 +28,21 @@ function genFile(file) {
 }
 
 function genAll() {
-  for (const f of readdirSync(cssDir).filter((f) => f.endsWith('.css') && f !== 'tokens.css')) genFile(f)
+  const names = cssNames()
+  for (const name of names) genFile(`${name}.css`)
+  prune(names)
+}
+
+// Drop a generated .ts whose .css is gone. Left behind it would keep exporting a
+// class contract with no styling behind it — and still typecheck, so nothing would
+// ever flag it. (The matching `exports` entry in package.json is still manual.)
+function prune(names) {
+  for (const f of readdirSync(outDir).filter((f) => f.endsWith('.ts'))) {
+    const name = f.replace(/\.ts$/, '')
+    if (names.includes(name)) continue
+    rmSync(join(outDir, f))
+    console.log(`[generated-classes] ${name}: removed (no ${name}.css)`)
+  }
 }
 
 genAll()
