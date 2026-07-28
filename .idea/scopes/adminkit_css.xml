@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="adminkit_css" pattern="file:packages/adminkit/src/css//*.css" />
+</component>

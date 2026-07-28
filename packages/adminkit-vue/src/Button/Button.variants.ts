@@ -1,15 +1,23 @@
-import { defineVariants } from 'adminkit/variants'
-import styles from './Button.module.scss'
+/* EXAMPLE — authoring pattern reference (css -> manifest -> defineVariants). */
+import { defineVariants } from '../lib'
+import { button as m } from 'adminkit/generated-classes/button'
 
-const variant = { primary: styles.buttonPrimary, secondary: styles.buttonSecondary, ghost: styles.buttonGhost }
-const size = { sm: styles.buttonSm, md: styles.buttonMd, lg: styles.buttonLg }
+const variant = { primary: m.buttonPrimary, secondary: m.buttonSecondary, ghost: m.buttonGhost }
+const size = { sm: m.buttonSm, md: m.buttonMd, lg: m.buttonLg }
 
-// Shared CORE resolver from `adminkit` — one algorithm for vanilla + Vue.
-export const button = defineVariants(styles.button, {
+// Style defaults live here, not in withDefaults — see README.
+export const button = defineVariants(m.button, {
   variants: { variant, size },
-  defaultVariants: { size: 'md' },
+  defaultVariants: { variant: 'primary', size: 'md' },
+  // compoundVariants EXAMPLE: class applied only when the full combo matches.
+  compoundVariants: [{ variant: 'primary', size: 'lg', class: m.buttonPrimaryLg }],
 })
 
 export type ButtonVariant = keyof typeof variant
 export type ButtonSize = keyof typeof size
-export type ButtonProps = { variant: ButtonVariant; size?: ButtonSize; disabled?: boolean }
+export type ButtonProps = {
+  variant?: ButtonVariant
+  size?: ButtonSize
+  disabled?: boolean
+  type?: 'button' | 'submit' | 'reset'
+}

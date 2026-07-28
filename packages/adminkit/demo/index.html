@@ -2,31 +2,46 @@
 <html lang="sk" data-theme="light">
 <head>
   <meta charset="utf-8" />
-  <title>adminkit — CSS + vanilla JS (no framework)</title>
-  <link rel="stylesheet" href="../src/scss/tokens.css" />
-  <link rel="stylesheet" href="../dist/button.css" />
-  <link rel="stylesheet" href="../dist/input.css" />
-  <link rel="stylesheet" href="../dist/card.css" />
-  <style>body{margin:2rem;font-family:var(--ds-font-sans);display:flex;flex-direction:column;gap:1.25rem;align-items:flex-start}.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:flex-start}h3{margin:.25rem 0;font-size:12px;color:#666;text-transform:uppercase}</style>
+  <title>adminkit — plain CSS (BEM), no framework</title>
+  <link rel="stylesheet" href="../src/css/tokens.css" />
+  <link rel="stylesheet" href="../src/css/button.css" />
+  <link rel="stylesheet" href="../src/css/input.css" />
+  <link rel="stylesheet" href="../src/css/card.css" />
+  <!-- Demo-page chrome only. The page background is mixed off the surface token because
+       adminkit has no page/background tier yet — see README "Theming". -->
+  <style>body{margin:0;padding:2rem;min-height:100vh;box-sizing:border-box;font-family:var(--ak-font-sans);color:var(--ak-color-text);background:color-mix(in srgb, var(--ak-color-surface) 92%, var(--ak-color-text));display:flex;flex-direction:column;gap:1.25rem;align-items:flex-start}.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:flex-start}h3{margin:.25rem 0;font-size:12px;opacity:.6;text-transform:uppercase}</style>
 </head>
 <body>
-  <h3>Static HTML (what Twig renders — plain BEM)</h3>
+  <!-- adminkit ships css + tokens + a generated as-const class manifest, no component
+       runtime. This is plain static HTML writing the same class strings Twig builds by
+       convention (ak-button--<variant>) and @adminkit/vue resolves through the manifest.
+       The only JS on the page is the theme toggle below. -->
   <div class="row">
-    <button class="button button--primary button--md">Primary</button>
-    <button class="button button--secondary button--md">Secondary</button>
-    <button class="button button--ghost button--md">Ghost</button>
-    <div class="field" style="width:200px"><label class="field__label">Email</label><input class="field__input field__input--invalid" placeholder="x@y.sk" /><p class="field__msg field__msg--invalid">Invalid</p></div>
-    <div class="card card--elevated" style="width:200px"><div class="card__header">Card</div><div class="card__body">Body</div></div>
+    <button class="ak-button ak-button--secondary ak-button--sm" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">
+      Toggle light / dark
+    </button>
   </div>
-  <h3>Vanilla JS (adminkit/dom) — no framework</h3>
-  <div class="row" id="js"></div>
-  <script type="module">
-    import { createButton, createInput, createCard } from '../src/dom/index.js'
-    document.getElementById('js').append(
-      createButton({ variant: 'primary', size: 'lg', label: 'JS Button' }),
-      createInput({ label: 'JS Input', placeholder: '…', hint: 'ok' }),
-      createCard({ variant: 'flat', header: 'JS Card', body: 'vanilla', footer: 'meta' }),
-    )
-  </script>
+  <h3>Button</h3>
+  <div class="row">
+    <button class="ak-button ak-button--primary ak-button--md">Primary</button>
+    <button class="ak-button ak-button--secondary ak-button--md">Secondary</button>
+    <button class="ak-button ak-button--ghost ak-button--md">Ghost</button>
+    <!-- primary + lg also carries the compound class. A naive `ak-button--{{ variant }}`
+         convention will not produce it — compounds need explicit template logic to match
+         what the Vue resolver emits. -->
+    <button class="ak-button ak-button--primary ak-button--lg ak-button--primary-lg">Large</button>
+    <button class="ak-button ak-button--primary ak-button--md" disabled>Disabled</button>
+  </div>
+  <h3>Input</h3>
+  <div class="row">
+    <div class="ak-field" style="width:220px"><label class="ak-field__label">Email</label><input class="ak-field__input" placeholder="jane@x.sk" /><p class="ak-field__msg">Your work email</p></div>
+    <div class="ak-field" style="width:220px"><label class="ak-field__label">Email</label><input class="ak-field__input ak-field__input--invalid" /><p class="ak-field__msg ak-field__msg--invalid">Invalid email</p></div>
+    <div class="ak-field ak-field--disabled" style="width:220px"><label class="ak-field__label">Email</label><input class="ak-field__input" disabled /><p class="ak-field__msg">Disabled</p></div>
+  </div>
+  <h3>Card</h3>
+  <div class="row">
+    <div class="ak-card ak-card--elevated" style="width:240px"><div class="ak-card__header">Elevated</div><div class="ak-card__body">Body content.</div><div class="ak-card__footer">Footer</div></div>
+    <div class="ak-card ak-card--flat" style="width:240px"><div class="ak-card__header">Flat</div><div class="ak-card__body">Body content.</div><div class="ak-card__footer">Footer</div></div>
+  </div>
 </body>
 </html>

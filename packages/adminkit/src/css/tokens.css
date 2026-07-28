@@ -1,0 +1,40 @@
+/* Design tokens. Set `data-theme="dark"` on any ancestor for dark theme. */
+
+:root {
+  /* tells the browser which palette to use for native UI it paints itself:
+     caret, scrollbars, autofill, date/select popups, form-control defaults */
+  color-scheme: light;
+
+  /* color — light (default) */
+  --ak-color-primary: #1e8449;
+  --ak-color-primary-hover: #196f3d;
+  --ak-color-primary-text: #ffffff;
+  --ak-color-surface: #ffffff;
+  --ak-color-text: #1a1a1a;
+  --ak-color-border: #d0d0d0;
+  --ak-color-danger: #c0392b;
+
+  /* sizing / typography (theme-agnostic) */
+  --ak-space-1: 4px;
+  --ak-space-2: 8px;
+  --ak-space-3: 12px;
+  --ak-space-4: 16px;
+  --ak-space-5: 24px;
+  --ak-radius-md: 8px;
+  --ak-text-sm: 13px;
+  --ak-text-md: 15px;
+  --ak-text-lg: 18px;
+  --ak-font-sans: system-ui, sans-serif;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --ak-color-primary: #2ecc71;
+  --ak-color-primary-hover: #27ae60;
+  --ak-color-primary-text: #0b1f14;
+  --ak-color-surface: #1e1e1e;
+  --ak-color-text: #e8e8e8;
+  --ak-color-border: #3a3a3a;
+  --ak-color-danger: #e74c3c;
+}

@@ -1,9 +1,10 @@
-import { defineParts } from 'adminkit/variants'
-import styles from './Card.module.scss'
+/* EXAMPLE component — reference for the authoring pattern. Replace/extend as the DS grows. */
+import { defineParts } from '../lib'
+import { card as m } from 'adminkit/generated-classes/card'
 
 export const card = defineParts({
-  parts: { root: styles.card, header: styles.cardHeader, body: styles.cardBody, footer: styles.cardFooter },
-  variants: { variant: { elevated: { root: styles.cardElevated }, flat: { root: styles.cardFlat } } },
+  parts: { root: m.card, header: m.cardHeader, body: m.cardBody, footer: m.cardFooter },
+  variants: { variant: { elevated: { root: m.cardElevated }, flat: { root: m.cardFlat } } },
   defaultVariants: { variant: 'elevated' },
 })
 

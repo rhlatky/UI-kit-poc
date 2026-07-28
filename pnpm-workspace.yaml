@@ -1,5 +1,7 @@
 packages:
   - 'packages/*'
+
+# Approve build scripts for these deps (pnpm 11 build-script gate)
 allowBuilds:
-  '@parcel/watcher': set this to true or false
-  esbuild: set this to true or false
+  esbuild: true
+  '@parcel/watcher': true

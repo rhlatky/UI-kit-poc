@@ -1,3 +1,12 @@
 node_modules
 dist
 *.tsbuildinfo
+.DS_Store
+.claude/
+# IDE: share only the File Watcher config + its scope, ignore per-user project files
+.idea/*
+!.idea/watcherTasks.xml
+!.idea/scopes/
+.vscode/*
+!.vscode/tasks.json
+.pnpm-store

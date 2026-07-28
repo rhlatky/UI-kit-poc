@@ -1,0 +1,71 @@
+/* Button — BEM in plain CSS, native nesting (form 2: modifiers as `&.block--mod`).
+   `&.ak-button--primary` = `.ak-button.ak-button--primary` — the element carries both
+   classes, which BEM markup does. States nested via `&:pseudo`. */
+.ak-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ak-space-2);
+  font-family: var(--ak-font-sans);
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: var(--ak-radius-md);
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* sizes */
+  &.ak-button--sm {
+    padding: var(--ak-space-1) var(--ak-space-3);
+    font-size: var(--ak-text-sm);
+  }
+  &.ak-button--md {
+    padding: var(--ak-space-2) var(--ak-space-4);
+    font-size: var(--ak-text-md);
+  }
+  &.ak-button--lg {
+    padding: var(--ak-space-3) var(--ak-space-5);
+    font-size: var(--ak-text-lg);
+  }
+
+  /* variants */
+  &.ak-button--primary {
+    background: var(--ak-color-primary);
+    color: var(--ak-color-primary-text);
+
+    &:hover:not(:disabled) {
+      background: var(--ak-color-primary-hover);
+    }
+  }
+  &.ak-button--secondary {
+    background: var(--ak-color-surface);
+    color: var(--ak-color-text);
+    border-color: var(--ak-color-border);
+
+    &:hover:not(:disabled) {
+      border-color: var(--ak-color-primary);
+      color: var(--ak-color-primary);
+    }
+  }
+  &.ak-button--ghost {
+    background: transparent;
+    color: var(--ak-color-primary);
+
+    &:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--ak-color-primary) 12%, transparent);
+    }
+  }
+}
+
+/* compoundVariants EXAMPLE — applied only when variant=primary AND size=lg */
+.ak-button--primary-lg {
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}

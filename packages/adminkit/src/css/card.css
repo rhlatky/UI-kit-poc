@@ -1,0 +1,33 @@
+/* Card — BEM in plain CSS. Block + modifiers nested via `&.`; elements top-level. */
+.ak-card {
+  overflow: hidden;
+  font-family: var(--ak-font-sans);
+  color: var(--ak-color-text);
+  background: var(--ak-color-surface);
+  border: 1px solid var(--ak-color-border);
+  border-radius: var(--ak-radius-md);
+
+  &.ak-card--elevated {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+  &.ak-card--flat {
+    box-shadow: none;
+  }
+}
+
+.ak-card__header {
+  padding: var(--ak-space-3) var(--ak-space-4);
+  font-weight: 700;
+  border-bottom: 1px solid var(--ak-color-border);
+}
+
+.ak-card__body {
+  padding: var(--ak-space-4);
+}
+
+.ak-card__footer {
+  padding: var(--ak-space-3) var(--ak-space-4);
+  font-size: var(--ak-text-sm);
+  color: var(--ak-color-text);
+  border-top: 1px solid var(--ak-color-border);
+}
