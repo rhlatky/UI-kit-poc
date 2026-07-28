@@ -9,6 +9,17 @@
   },
   "scripts": {
     "gen": "node packages/adminkit/scripts/gen.mjs",
-    "gen:watch": "node packages/adminkit/scripts/gen.mjs --watch"
+    "gen:watch": "node packages/adminkit/scripts/gen.mjs --watch",
+    "lint": "oxlint && eslint .",
+    "lint:fix": "oxlint --fix && eslint . --fix"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.0",
+    "eslint-plugin-oxlint": "^1.75.0",
+    "eslint-plugin-vue": "^10.10.0",
+    "oxlint": "^1.75.0",
+    "typescript-eslint": "^8.65.0",
+    "vue-eslint-parser": "^10.4.1"
   }
 }

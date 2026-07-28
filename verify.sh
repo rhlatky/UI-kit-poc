@@ -25,7 +25,10 @@ fi
 echo "3) @adminkit/vue → vue-tsc (level-2: typo'd class = compile error)"
 pnpm --filter @adminkit/vue exec vue-tsc --noEmit
 
-echo "4) unit tests → extraction, token contract, variant resolvers"
+echo "4) lint → oxlint + eslint (vue)"
+pnpm lint
+
+echo "5) unit tests → extraction, token contract, variant resolvers"
 pnpm -C packages/adminkit test
 pnpm --filter @adminkit/vue test
 
