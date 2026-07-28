@@ -1,16 +1,7 @@
-// Pure css readers used by the generators. Kept separate from them so they are testable.
-//
-// Classes are read ONLY from selector position. Scanning the whole file would also
-// match any dot inside a declaration value — `url(./icons/star.svg)` yields `svg`,
-// `font-family: "Arial.Narrow"` yields `Narrow` — and a phantom key is indistinguishable
-// from a real one in the `as const` manifest, so `m.svg` would typecheck and render a
-// class with no styling behind it.
+// Classes extracted from selector position only — values like `url(./foo.svg)` would create phantom keys that typecheck but have no styling.
 
 const COMMENTS = /\/\*[\s\S]*?\*\//g
-// Everything up to the `{` that opens a rule. `[^{};]*` cannot cross a `{`, `}` or `;`,
-// so it starts at the previous boundary on its own — without consuming that boundary,
-// which would make the regex skip a rule nested directly inside another (`@media { .x {`).
-// Native nesting needs nothing extra: a nested prelude follows `{` or `;` like any other.
+// `[^{};]*` anchors at {/}/; boundaries without consuming them, so nested rules aren't skipped.
 const RULE_PRELUDES = /([^{};]*)\{/g
 const CLASS = /\.(-?[_a-zA-Z][\w-]*)/g
 // A custom property is only DECLARED where a `:` follows the name. `var(--x)` and
@@ -20,11 +11,7 @@ const TOKEN_REF = /var\(\s*(--[\w-]+)/g
 
 export const camel = (s) => s.replace(/[-_]+([a-zA-Z0-9])/g, (_, c) => c.toUpperCase())
 
-// The `ak-` namespace keeps the css from colliding with a host app's global styles. It is
-// stripped from manifest KEYS so authoring stays `m.buttonPrimary` / `t.colorPrimary`,
-// while the values carry the real, namespaced names.
-// The leading `--` is css syntax rather than part of the name, so it goes even when the
-// namespace is absent — otherwise camel() reads it as a separator and yields `OtherColor`.
+// Strip `ak-` namespace from keys (values keep it). `--` is also stripped so camel() doesn't produce `OtherColor`.
 export const classKey = (className) => camel(className.replace(/^ak-/, ''))
 export const tokenKey = (tokenName) => camel(tokenName.replace(/^--(?:ak-)?/, ''))
 

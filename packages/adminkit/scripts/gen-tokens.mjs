@@ -1,10 +1,4 @@
-// tokens.css → generated-tokens.ts : an `as const` map of camelCased key → custom
-// property NAME (`colorPrimary` → `--ds-color-primary`).
-//
-// Names, not values: values differ per theme, so shipping them would freeze one theme
-// into JS. With the names typed, a runtime brand override
-// (`el.style.setProperty(t.colorPrimary, …)`) cannot misspell a property — which
-// otherwise fails silently, since an unknown custom property is simply ignored.
+// tokens.css -> generated-tokens.ts : typed map of custom-property names (not values — values differ per theme).
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'

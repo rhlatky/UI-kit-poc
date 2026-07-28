@@ -1,22 +1,15 @@
-/* EXAMPLE component — reference for the authoring pattern (css → generated
-   manifest → defineVariants). Not a fixed API; replace/extend as the DS grows. */
+/* EXAMPLE — authoring pattern reference (css -> manifest -> defineVariants). */
 import { defineVariants } from '../lib'
 import { button as m } from 'adminkit/generated-classes/button'
 
 const variant = { primary: m.buttonPrimary, secondary: m.buttonSecondary, ghost: m.buttonGhost }
 const size = { sm: m.buttonSm, md: m.buttonMd, lg: m.buttonLg }
 
-// defaultVariants is the ONE place a style default is written. Components must not
-// repeat it in withDefaults: the prop would then always be defined and the resolver
-// would never consult its own default, so the two literals could drift apart while
-// only the prop one had any effect. Non-Vue callers (Twig class building, tests) get
-// the same defaults for free.
+// Style defaults live here, not in withDefaults — see README.
 export const button = defineVariants(m.button, {
   variants: { variant, size },
   defaultVariants: { variant: 'primary', size: 'md' },
-  // compoundVariants EXAMPLE: a class applied ONLY when the whole combo matches.
-  //   button({ variant: 'primary', size: 'lg' }) → "button button--primary button--lg button--primary-lg"
-  //   button({ variant: 'primary', size: 'md' }) → "button button--primary button--md"   (no compound)
+  // compoundVariants EXAMPLE: class applied only when the full combo matches.
   compoundVariants: [{ variant: 'primary', size: 'lg', class: m.buttonPrimaryLg }],
 })
 

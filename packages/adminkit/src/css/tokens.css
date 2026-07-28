@@ -1,6 +1,4 @@
-/* Design tokens. Colors are theme-scoped; sizing/typography are theme-agnostic.
-   Theming convention: set `data-theme="dark"` on <html> (or any ancestor) to opt
-   into dark. Light is the default (:root). */
+/* Design tokens. Set `data-theme="dark"` on any ancestor for dark theme. */
 
 :root {
   /* tells the browser which palette to use for native UI it paints itself:

@@ -1,7 +1,4 @@
-// One entry point for both manifests — used by `pnpm gen`, verify.sh and the IDE
-// watchers. Keeping the watch loop here (rather than in one generator) means a save to
-// any css file, tokens.css included, refreshes everything: a token added but not
-// regenerated is exactly the drift the guard in verify.sh would later fail on.
+// Single entry point for both generators. Watch loop here so any .css save regenerates everything.
 import { watch } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
